@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+.next/
+.vite/
+.env
+.env.*
+coverage/
+.supabase/
+.cursor/
+.DS_Store
+.idea/
+.vscode/
