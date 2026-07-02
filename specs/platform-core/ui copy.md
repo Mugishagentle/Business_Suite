@@ -305,3 +305,450 @@ States:
 - Verification failed
 - Resend verification email
 ```
+
+---
+
+# 6. Workspace Features
+
+Workspace Features are available to authenticated users after selecting or entering a workspace.
+
+Every feature must respect:
+
+- Tenant Isolation
+- Role-Based Permissions
+- Subscription Package
+- Active Workspace
+
+---
+
+# 6.1 Dashboard
+
+## Purpose
+
+The Dashboard provides an overview of the active workspace.
+
+It should display only information available within the current workspace.
+
+---
+
+## Dashboard Widgets
+
+Suggested widgets include:
+
+### Company Summary
+
+- Company Name
+- Package
+- Trial Status
+- Subscription Status
+
+---
+
+### Statistics
+
+Examples:
+
+- Total Users
+- Total Branches
+- Active Modules
+- Pending Invitations
+
+---
+
+### Quick Actions
+
+Examples:
+
+- Invite User
+- Add Branch
+- Edit Company
+- View Subscription
+
+---
+
+### Notifications
+
+Recent platform notifications.
+
+---
+
+### Recent Activity
+
+Recent user activities.
+
+Examples:
+
+- User invited
+- Branch created
+- Subscription activated
+
+---
+
+## Actions
+
+- Refresh Dashboard
+- Navigate to feature pages
+
+---
+
+# 6.2 Company Management
+
+## Purpose
+
+Manage company information for the active workspace.
+
+Each tenant owns one company in Version 1.
+
+---
+
+## Screen Components
+
+- Company Information Card
+- Contact Information
+- Branding
+- Business Settings
+
+---
+
+## Editable Fields
+
+- Legal Name
+- Trading Name
+- Registration Number
+- Tax Identification Number
+- Industry
+- Logo
+- Email
+- Phone
+- Website
+- Address
+- Country
+- Currency
+- Time Zone
+- Language
+- Financial Year
+
+---
+
+## Actions
+
+- Edit Company
+- Upload Logo
+- Save Changes
+
+---
+
+## UI Behaviour
+
+- Display information in sections.
+- Editing should occur within a modal where practical.
+- Large forms may use a dedicated page.
+
+---
+
+# 6.3 Branch Management
+
+## Purpose
+
+Manage company branches.
+
+---
+
+## List View
+
+Display:
+
+- Branch Name
+- Code
+- Manager
+- Status
+- Phone
+- Location
+
+---
+
+## Actions
+
+- Add Branch
+- Edit Branch
+- View Branch
+- Activate Branch
+- Deactivate Branch
+
+---
+
+## Add Branch
+
+Open using a modal.
+
+Fields:
+
+- Branch Name
+- Code
+- Address
+- Country
+- City
+- Phone
+- Email
+- Branch Manager
+
+---
+
+## Validation
+
+- Branch Name required.
+- Branch limit should respect the subscription package.
+- Prevent duplicate branch codes within a tenant.
+
+---
+
+# 6.4 Workspace Users
+
+## Purpose
+
+Manage users belonging to the active workspace.
+
+---
+
+## List View
+
+Display:
+
+- Name
+- Email
+- Role
+- Status
+- Last Login
+- Date Joined
+
+---
+
+## Actions
+
+- Invite User
+- Edit User Role
+- Suspend User
+- Remove User
+- Resend Invitation
+
+---
+
+## Invite User
+
+Use a modal.
+
+Fields:
+
+- Email
+- Role
+- Default Branch (Optional)
+
+Workflow:
+
+If user exists:
+
+- Create Tenant Membership.
+
+If user does not exist:
+
+- Create Platform User.
+- Send Invitation.
+- Create Membership after acceptance.
+
+---
+
+## Validation
+
+- Email required.
+- Valid email format.
+- Prevent duplicate memberships.
+
+---
+
+# 6.5 Roles
+
+## Purpose
+
+Manage workspace roles.
+
+---
+
+## List View
+
+Display:
+
+- Role Name
+- Description
+- Number of Users
+
+---
+
+## Actions
+
+- Add Role
+- Edit Role
+- Delete Role
+- Assign Permissions
+
+---
+
+## Add Role
+
+Use a modal.
+
+Fields:
+
+- Role Name
+- Description
+
+---
+
+## Validation
+
+- Role Name required.
+- Role Name must be unique within the workspace.
+
+---
+
+# 6.6 Permissions
+
+## Purpose
+
+Assign permissions to workspace roles.
+
+---
+
+## Screen Layout
+
+Permission Matrix.
+
+Columns:
+
+- View
+- Create
+- Edit
+- Delete
+- Approve
+- Reject
+- Export
+- Print
+- Configure
+
+Rows:
+
+Grouped by module.
+
+Examples:
+
+CRM
+
+Sales
+
+Inventory
+
+Finance
+
+Reports
+
+Platform
+
+---
+
+## Actions
+
+- Select All
+- Clear All
+- Save
+
+---
+
+## Validation
+
+Permissions should only be editable by authorized users.
+
+Changes should be audited.
+
+---
+
+# 6.7 User Profile
+
+## Purpose
+
+Allow users to manage their personal profile.
+
+---
+
+## Sections
+
+- Personal Information
+- Password
+- Authentication
+- Preferences
+
+---
+
+## Editable Fields
+
+- Name
+- Phone
+- Profile Picture
+- Language
+- Time Zone
+
+---
+
+## Security
+
+Users may:
+
+- Change Password
+- Enable MFA
+- Disable MFA
+- View Active Sessions (Future)
+
+---
+
+# 6.8 Workspace Switching
+
+## Purpose
+
+Allow users to switch between workspaces.
+
+---
+
+## Component
+
+Workspace Switcher.
+
+Displayed in the top navigation.
+
+---
+
+## Information Displayed
+
+- Workspace Name
+- Company Logo
+- User Role
+- Subscription Status
+
+---
+
+## Actions
+
+- Switch Workspace
+- Set Default Workspace
+
+---
+
+## Behaviour
+
+Switching workspaces should immediately update:
+
+- Sidebar
+- Permissions
+- Company Information
+- Modules
+- Dashboard
+- Data Context
+
+No page refresh should be required.

@@ -74,22 +74,86 @@ Contains all human-readable documentation.
 
 # 5. AI Specifications
 
-```text
+# 5. AI Specifications
+
+````text
 specs/
 
-platform-foundation/
+platform-framework/
+    README.md
+    routing.md
+    layouts.md
+    navigation.md
+    shared-components.md
+    state-management.md
+    services.md
+    authentication.md
+    theme.md
+
+platform-core/
+    README.md
+    database.md
+    ui.md
+    workflows.md
+    security.md
+    acceptance.md
+
+workflow-engine/
+    README.md
+    database.md
+    ui.md
+    workflows.md
+    security.md
+    acceptance.md
+
+reference-data-engine/
+    README.md
+    database.md
+    ui.md
+    workflows.md
+    security.md
+    acceptance.md
+
+notification-engine/
+    README.md
+    database.md
+    ui.md
+    workflows.md
+    security.md
+    acceptance.md
+
+document-numbering-engine/
+    README.md
+    database.md
+    ui.md
+    workflows.md
+    security.md
+    acceptance.md
+
+document-management-engine/
+    README.md
+    database.md
+    ui.md
+    workflows.md
+    security.md
+    acceptance.md
+
+reporting-engine/
+    README.md
+    database.md
+    ui.md
+    workflows.md
+    security.md
+    acceptance.md
+
 crm/
 sales/
 inventory/
+procurement/
 finance/
 hr/
-procurement/
+pos/
 reports/
-```
-
-Contains detailed implementation specifications that will be used by Lovable and Cursor.
-
-These are not user documentation.
 
 ---
 
@@ -102,7 +166,7 @@ lovable/
 cursor/
 architecture/
 templates/
-```
+````
 
 Contains reusable prompts used during development.
 
