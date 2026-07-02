@@ -223,13 +223,39 @@ Reference tables store reusable lookup data used across the platform.
 
 These tables help avoid repeated text values and make the system easier to scale across countries, currencies, and regions.
 
+````text
+user_codes
+
+| Column      | Type      | Notes            |
+| ----------- | --------- | ---------------- |
+| id          | uuid      | Primary key      |
+| code        | text      | Required, unique |
+| name        | text      | Required         |
+| description | text      | Optional         |
+| scope       | text      | global, tenant   |
+| tenant_id   | uuid      | Optional         |
+| status      | text      | active, inactive |
+| created_at  | timestamp | Required         |
+| updated_at  | timestamp | Required         |
+
+Examples:
+
+SUBSCRIPTION_STATUS
+TENANT_STATUS
+USER_STATUS
+BRANCH_STATUS
+NOTIFICATION_CHANNEL
+PERMISSION_ACTION
+INDUSTRY_TYPE
+SUPPORT_LEVEL
+
 ## 5.1.1 countries
 
 Stores supported countries.
 
 ```text
 countries
-```
+````
 
 | Column                | Type      | Notes                   |
 | --------------------- | --------- | ----------------------- |
@@ -326,6 +352,55 @@ Rules:
 - Languages are platform-wide.
 - Users and companies may reference preferred languages.
 - This supports future localization.
+
+  5.1.6 user_code_values
+
+Stores values under each user code group.
+
+user_code_values
+
+| Column       | Type      | Notes                    |
+| ------------ | --------- | ------------------------ |
+| id           | uuid      | Primary key              |
+| user_code_id | uuid      | References user_codes.id |
+| code         | text      | Required                 |
+| name         | text      | Required                 |
+| description  | text      | Optional                 |
+| sort_order   | integer   | Optional                 |
+| metadata     | jsonb     | Optional                 |
+| status       | text      | active, inactive         |
+| created_at   | timestamp | Required                 |
+| updated_at   | timestamp | Required                 |
+
+Examples:
+
+For SUBSCRIPTION_STATUS:
+
+TRIAL
+ACTIVE
+EXPIRED
+SUSPENDED
+CANCELLED
+
+For PERMISSION_ACTION:
+
+VIEW
+CREATE
+EDIT
+DELETE
+APPROVE
+REJECT
+EXPORT
+PRINT
+CONFIGURE
+
+Rules:
+
+Dropdown values should come from user_code_values.
+Status values should come from user_code_values where practical.
+User code groups may be global or tenant-specific.
+Tenant-specific user codes must include tenant_id.
+Do not hardcode dropdown values in the UI.
 
 # 6. Identity & Tenancy Tables
 
@@ -1309,6 +1384,22 @@ Seed permissions for every module using standard actions:
 - Configure
 
 ---
+
+## User Codes
+
+Seed default user code groups and values for:
+
+- Tenant Status
+- Subscription Status
+- User Status
+- Branch Status
+- Package Status
+- Module Status
+- Notification Channel
+- Notification Status
+- Permission Actions
+- Industry Types
+- Support Levels
 
 # 19. Future Expansion
 
