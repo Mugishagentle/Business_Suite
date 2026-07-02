@@ -74,8 +74,6 @@ Contains all human-readable documentation.
 
 # 5. AI Specifications
 
-# 5. AI Specifications
-
 ````text
 specs/
 
@@ -278,35 +276,31 @@ Business logic must never be placed here.
 
 # 13. Features
 
-Every business module lives inside:
+Every platform service and business module lives inside:
 
-```text
-src/features/
-```
-
-Example:
-
-```text
+````text
 src/features/
 
-platform/
+platform-framework/
+platform-core/
+workflow-engine/
+reference-data-engine/
+notification-engine/
+document-numbering-engine/
+document-management-engine/
+reporting-engine/
+
 crm/
 sales/
 inventory/
-finance/
 procurement/
+finance/
 hr/
-reports/
+pos/
 settings/
-```
 
-Every module owns its own components, services, pages, hooks and types.
 
-Modules must never depend directly on another module.
 
-Shared functionality belongs in shared folders.
-
----
 
 # 14. Standard Module Structure
 
@@ -323,7 +317,7 @@ types/
 validators/
 utils/
 constants/
-```
+````
 
 Example:
 
