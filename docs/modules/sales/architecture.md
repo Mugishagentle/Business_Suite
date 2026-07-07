@@ -1,4 +1,4 @@
-# Sales Documents Module - ARCHITECTURE.md
+# Sales Module - ARCHITECTURE.md
 
 > Business Suite Enterprise Platform
 
@@ -6,861 +6,901 @@
 
 # 1. Architecture Overview
 
-The Sales Documents Module is an enterprise document orchestration layer that connects CRM, Sales, Finance, and the Business Suite Platform Engines.
+The Sales Module is the commercial execution layer of the Business Suite Enterprise Platform.
 
-It is responsible for managing the complete lifecycle of official sales documents from creation to approval, issuance, storage, verification, communication, reporting, and audit.
-
-The module does not duplicate responsibilities owned by other platform engines. Instead, it delegates shared platform responsibilities to the correct engine.
+It manages sales planning, pricing, pipeline execution, targets, forecasting, sales performance, and commercial coordination while relying on other modules and Platform Engines for customer ownership, document issuance, stock control, accounting, approvals, notifications, audit, reporting, and search.
 
 ---
 
 # 2. Architectural Position
 
 ```text
-CRM Module
+CRM
+    │
+    ▼
+Sales Module
     │
     ▼
 Sales Documents Module
     │
     ▼
-Finance Module
+Inventory
+    │
+    ▼
+Finance
 ```
 
-The module sits between CRM and Finance.
+The Sales Module sits between CRM and Sales Documents.
 
-CRM provides the customer and opportunity context.
+CRM owns customer relationships and opportunities.
 
-Sales Documents manages sales document creation and issuance.
+Sales owns the commercial execution process.
 
-Finance receives approved financial documents for receivables, payments, receipts, and ledger postings.
+Sales Documents owns official documents.
+
+Inventory owns stock and fulfillment.
+
+Finance owns receivables, payments, receipts, and accounting impact.
 
 ---
 
 # 3. Core Architecture Principle
 
-The Sales Documents Module must follow this rule:
-
 ```text
-Sales Documents owns document business intent.
-Platform Engines own shared enterprise capabilities.
-Finance owns accounting impact.
+Sales owns commercial execution.
 CRM owns customer relationship context.
+Sales Documents owns official document issuance.
+Inventory owns stock control.
+Finance owns accounting impact.
+Platform Engines own shared enterprise services.
 ```
-
-This keeps the architecture clean, modular, auditable, and scalable.
 
 ---
 
-# 4. High-Level Flow
+# 4. High-Level Sales Flow
 
 ```text
-Opportunity Won
-    │
-    ▼
-Create Quotation
-    │
-    ▼
-Approve Quotation
-    │
-    ▼
-Issue Quotation
-    │
-    ▼
-Create Sales Order
-    │
-    ▼
-Issue Delivery Note
-    │
-    ▼
-Create Sales Invoice
-    │
-    ▼
-Post Receivable to Finance
-    │
-    ▼
-Receive Payment
-    │
-    ▼
-Issue Receipt
+Qualified Opportunity
+        │
+        ▼
+Sales Pipeline Entry
+        │
+        ▼
+Pricing Review
+        │
+        ▼
+Discount Request
+        │
+        ▼
+Quotation Request
+        │
+        ▼
+Customer Negotiation
+        │
+        ▼
+Customer Acceptance
+        │
+        ▼
+Sales Order Request
+        │
+        ▼
+Inventory Coordination
+        │
+        ▼
+Delivery Coordination
+        │
+        ▼
+Invoice Request
+        │
+        ▼
+Finance Receivable
+        │
+        ▼
+Sales Performance Update
 ```
 
 ---
 
 # 5. Main Architectural Components
 
-The module is made up of the following components:
+The Sales Module consists of the following components:
 
-- Sales Document Service
-- Quotation Service
-- Sales Order Service
-- Delivery Note Service
-- Invoice Generation Service
-- Customer Statement Service
-- Document Security Service
-- Document Verification Service
-- Document Rendering Service
-- Document Lifecycle Service
-- Sales Document Event Publisher
-- Sales Document Integration Layer
+- Sales Pipeline Service
+- Sales Planning Service
+- Sales Team Service
+- Sales Territory Service
+- Sales Target Service
+- Pricing Service
+- Discount Management Service
+- Promotion Service
+- Sales Forecasting Service
+- Sales Performance Service
+- Commission Service
+- Customer Sales Insight Service
+- Sales Coordination Service
+- Sales Event Publisher
+- Sales Integration Layer
 
 ---
 
-# 6. Sales Document Service
+# 6. Sales Pipeline Service
 
-The Sales Document Service provides the common foundation for all sales documents.
+The Sales Pipeline Service manages sales movement after CRM qualification.
 
 Responsibilities:
 
-- Manage document headers
-- Manage document lines
-- Manage document totals
-- Manage document status
-- Manage document references
-- Track document lifecycle
-- Validate document ownership
-- Coordinate document issuance
-- Maintain document relationships
+- Track qualified opportunities
+- Manage sales stages
+- Track sales probability
+- Track estimated revenue
+- Track expected close date
+- Track next action
+- Track customer decision status
+- Update pipeline progress
+- Provide pipeline visibility
+- Support pipeline reporting
 
-It provides shared behavior for:
+CRM owns the original opportunity record.
 
-- Quotations
-- Sales Orders
-- Delivery Notes
-- Sales Invoices
-- Receipts
-- Credit Notes
-- Debit Notes
-- Customer Statements
+Sales owns the commercial pipeline execution after qualification.
 
 ---
 
-# 7. Quotation Service
+# 7. Sales Planning Service
 
-The Quotation Service manages sales quotations created from opportunities, customers, or manual sales processes.
+The Sales Planning Service supports structured sales execution.
 
 Responsibilities:
 
-- Create quotations
-- Link quotations to opportunities
-- Manage quotation items
-- Calculate totals
-- Apply taxes
-- Apply discounts
-- Submit quotations for approval
-- Issue approved quotations
-- Send quotations to customers
-- Track quotation acceptance or rejection
-
-Quotation numbers are generated by the Document Numbering Engine.
-
-Quotation PDFs are stored in the Document Management Engine.
+- Define sales plans
+- Assign sales objectives
+- Plan customer engagement
+- Plan sales campaigns
+- Plan product focus areas
+- Plan regional sales activities
+- Align targets with sales strategy
 
 ---
 
-# 8. Sales Order Service
+# 8. Sales Team Service
 
-The Sales Order Service manages confirmed customer orders.
+The Sales Team Service manages sales organization structures.
 
 Responsibilities:
 
-- Create sales orders from approved quotations
-- Create sales orders manually where permitted
-- Validate customer and pricing information
-- Validate stock availability where inventory is enabled
-- Submit orders for approval where required
-- Issue confirmed sales orders
-- Trigger fulfillment processes
-- Link sales orders to delivery notes and invoices
+- Define sales teams
+- Assign sales representatives
+- Assign sales managers
+- Assign branch sales users
+- Manage team hierarchy
+- Track team performance
+- Support team-based reporting
 
-Sales Order numbers are generated by the Document Numbering Engine.
+User identity is provided by Platform Core.
+
+Permissions are enforced by the Authorization Engine.
 
 ---
 
-# 9. Delivery Note Service
+# 9. Sales Territory Service
 
-The Delivery Note Service manages proof of goods or service delivery.
+The Sales Territory Service manages geographic or business-based sales coverage.
 
 Responsibilities:
 
-- Create delivery notes from sales orders
-- Confirm delivered items
-- Track partial deliveries
-- Track delivery status
-- Capture delivery references
-- Support delivery confirmation
-- Trigger invoice eligibility where applicable
+- Define territories
+- Assign territories to teams
+- Assign territories to users
+- Link territories to regions
+- Link territories to branches
+- Track territory revenue
+- Track territory performance
 
-Delivery Note numbers are generated by the Document Numbering Engine.
+Territories are configurable per tenant using Reference Data.
 
 ---
 
-# 10. Invoice Generation Service
+# 10. Sales Target Service
 
-The Invoice Generation Service manages the creation of sales invoices.
+The Sales Target Service manages targets and quotas.
 
 Responsibilities:
 
-- Create invoices from sales orders
-- Create invoices from delivery notes
-- Create invoices directly where permitted
-- Validate billable items
-- Calculate taxes
-- Calculate discounts
-- Calculate totals
-- Submit invoices for approval
-- Issue approved invoices
-- Send invoices to customers
-- Trigger Finance receivable creation
+- Create sales targets
+- Assign targets to users
+- Assign targets to teams
+- Assign targets to branches
+- Assign targets to territories
+- Track target achievement
+- Track target variance
+- Support target approvals
+- Support target revision history
 
-Invoice numbers are generated by the Document Numbering Engine.
+Targets may be based on:
 
-Ledger posting is handled by Finance.
+- Revenue
+- Quantity
+- Product category
+- Customer segment
+- Territory
+- Branch
+- Sales channel
 
 ---
 
-# 11. Customer Statement Service
+# 11. Pricing Service
 
-The Customer Statement Service provides consolidated customer account summaries.
+The Pricing Service manages commercial pricing rules.
 
 Responsibilities:
 
-- Generate customer statements
-- Pull invoice data from Sales and Finance
-- Pull receipt data from Finance
-- Show outstanding balances
-- Show payments
-- Show credit notes
-- Show debit notes
-- Show aging summaries
-- Generate statement PDFs
-- Send statements to customers
+- Manage price lists
+- Manage customer-specific pricing
+- Manage product pricing
+- Manage service pricing
+- Manage branch pricing
+- Manage promotional pricing
+- Support effective dates
+- Support currency rules
+- Support price history
+- Support pricing approval workflows
 
-Customer statements are generated using Finance balances and document references.
+Pricing changes may require workflow approval.
 
 ---
 
-# 12. Document Security Service
+# 12. Discount Management Service
 
-The Document Security Service applies the Business Document Security Standard.
+The Discount Management Service controls discount requests and approvals.
 
 Responsibilities:
 
-- Generate verification code
-- Generate QR Code reference
-- Generate verification URL
-- Generate internal serial number
-- Generate digital hash
-- Apply watermark
-- Apply system generated notice
-- Attach audit reference
-- Track version number
-- Ensure issued documents cannot be silently altered
+- Capture discount requests
+- Validate discount limits
+- Route discount approvals
+- Track approval history
+- Enforce approved discount values
+- Prevent unauthorized discounts
+- Support discount analytics
 
-The service does not store PDFs directly.
-
-PDF storage is handled by the Document Management Engine.
+Discount approval thresholds are configurable per tenant.
 
 ---
 
-# 13. Document Verification Service
+# 13. Promotion Service
 
-The Document Verification Service validates official documents using secure verification codes.
+The Promotion Service manages temporary sales campaigns and offers.
 
 Responsibilities:
 
-- Validate verification code
-- Resolve document metadata
-- Check document status
-- Detect expired documents
-- Detect voided documents
-- Detect reversed documents
-- Detect superseded documents
-- Record verification attempt
-- Return verification result
+- Create promotions
+- Define promotion periods
+- Define eligible products
+- Define eligible customer segments
+- Define discount rules
+- Define branch or territory applicability
+- Track promotion performance
+- Retire expired promotions
 
-Verification URL format:
-
-```text
-https://businesssuite.app/verify/{verification_code}
-```
+Promotions may require approval before activation.
 
 ---
 
-# 14. Document Rendering Service
+# 14. Sales Forecasting Service
 
-The Document Rendering Service prepares official document output.
+The Sales Forecasting Service estimates future revenue.
 
 Responsibilities:
 
-- Build printable document layout
-- Apply tenant branding
-- Apply branch branding where applicable
-- Apply page numbers
-- Apply footer notices
-- Apply QR Code
-- Apply watermark
-- Apply terms and conditions
-- Render PDF preview
-- Render final PDF
+- Build sales forecasts
+- Track expected revenue
+- Track weighted pipeline
+- Track committed revenue
+- Track best-case revenue
+- Track forecast revisions
+- Compare forecast against actuals
+- Support management review
 
-Final PDFs are stored through the Document Management Engine.
+Forecasts may be generated by:
 
----
-
-# 15. Document Lifecycle Service
-
-The Document Lifecycle Service controls status transitions.
-
-Standard lifecycle:
-
-```text
-Draft
-    ↓
-Submitted
-    ↓
-Approved
-    ↓
-Issued
-    ↓
-Sent
-    ↓
-Accepted / Paid / Closed
-```
-
-Alternative lifecycle paths:
-
-```text
-Rejected
-Cancelled
-Voided
-Expired
-Reversed
-Superseded
-```
-
-The service ensures that invalid transitions are blocked.
+- Salesperson
+- Team
+- Branch
+- Territory
+- Product category
+- Customer segment
+- Sales channel
 
 ---
 
-# 16. Sales Document Integration Layer
+# 15. Sales Performance Service
 
-The Integration Layer connects Sales Documents with other modules and engines.
+The Sales Performance Service tracks actual commercial results.
 
-It handles:
+Responsibilities:
 
-- CRM integration
-- Finance integration
-- Inventory integration
-- Workflow integration
-- Document Management integration
-- Notification integration
-- Audit integration
-- Search indexing integration
-- Reporting integration
-- Event Bus publishing
+- Track sales volume
+- Track sales value
+- Track conversion rates
+- Track average deal size
+- Track target achievement
+- Track customer retention
+- Track sales cycle duration
+- Track revenue by branch
+- Track revenue by salesperson
+- Track revenue by territory
+
+Actual revenue is derived from issued invoices and finance records.
 
 ---
 
-# 17. CRM Integration
+# 16. Commission Service
+
+The Commission Service manages sales commissions and incentives.
+
+Responsibilities:
+
+- Define commission rules
+- Calculate commission eligibility
+- Track commissionable sales
+- Support approval of commissions
+- Support commission adjustments
+- Provide commission reports
+
+Commission payment processing remains owned by Finance or Payroll where applicable.
+
+---
+
+# 17. Customer Sales Insight Service
+
+The Customer Sales Insight Service provides commercial customer intelligence.
+
+Responsibilities:
+
+- View sales history
+- Analyze buying patterns
+- Track customer revenue
+- Track customer profitability
+- Track product preferences
+- Track quotation conversion
+- Track outstanding sales opportunities
+- Support upsell and cross-sell insights
+
+CRM displays customer insight, but Sales calculates commercial sales performance.
+
+---
+
+# 18. Sales Coordination Service
+
+The Sales Coordination Service coordinates downstream business operations.
+
+Responsibilities:
+
+- Request quotations from Sales Documents
+- Request sales orders from Sales Documents
+- Request inventory availability checks
+- Request stock reservation
+- Request delivery coordination
+- Request invoice generation
+- Track fulfillment progress
+- Track invoice status
+- Track payment status
+
+This service connects sales execution to operational fulfillment.
+
+---
+
+# 19. Sales Integration Layer
+
+The Sales Integration Layer connects the Sales Module to:
+
+- CRM Module
+- Sales Documents Module
+- Inventory Module
+- Finance Module
+- Platform Core
+- Authorization Engine
+- Workflow Engine
+- Notification Engine
+- Reference Data Engine
+- Activity & Audit Engine
+- Search & Indexing Engine
+- Reporting Engine
+- Platform Event Bus
+
+---
+
+# 20. CRM Integration
 
 CRM provides:
 
-- Lead context
-- Account context
-- Customer context
-- Contact context
-- Opportunity context
-- Customer timeline
-- Customer 360 visibility
+- Leads
+- Accounts
+- Customers
+- Contacts
+- Opportunities
+- Activities
+- Customer Timeline
+- Customer 360
 
-Sales Documents consumes CRM data but does not own CRM records.
+Sales consumes CRM information but does not own CRM records.
 
-Example integration:
+Sales updates CRM with:
 
-```text
-OpportunityWon
-    ↓
-QuotationCreated
-    ↓
-CustomerTimelineUpdated
-```
-
-CRM should display related sales documents but not manage their lifecycle.
-
----
-
-# 18. Finance Integration
-
-Finance receives financial impact from issued invoices, payments, receipts, credit notes, and debit notes.
-
-Finance owns:
-
-- Customer accounts
-- Receivables
-- Payments
-- Receipts
-- Ledger postings
-- Tax postings
-- Account balances
-- Financial statements
-
-Sales Documents triggers finance events but does not post accounting entries directly.
-
-Example:
-
-```text
-InvoiceIssued
-    ↓
-FinanceReceivableCreated
-    ↓
-LedgerPostingCreated
-```
+- Pipeline stage changes
+- Sales progress
+- Customer negotiation updates
+- Sales outcomes
+- Customer buying history
+- Lost reasons
+- Revenue summaries
 
 ---
 
-# 19. Inventory Integration
+# 21. Sales Documents Integration
 
-Where inventory is enabled, Sales Documents may integrate with Inventory.
-
-Inventory provides:
-
-- Stock availability
-- Item master data
-- Warehouses
-- Stores
-- Stock reservations
-- Stock movements
-- Delivery fulfillment
-
-Example:
-
-```text
-SalesOrderIssued
-    ↓
-StockReserved
-    ↓
-DeliveryNoteIssued
-    ↓
-StockReduced
-```
-
-Inventory integration is optional per tenant.
-
----
-
-# 20. Workflow Engine Integration
-
-The Workflow Engine controls approvals.
-
-Used for:
-
-- Quotation Approval
-- Discount Approval
-- Sales Order Approval
-- Invoice Approval
-- Credit Note Approval
-- Receipt Reversal Approval
-
-The Sales Documents Module submits approval requests but does not own workflow levels or approval rules.
-
----
-
-# 21. Document Numbering Engine Integration
-
-All official document numbers are generated by the Document Numbering Engine.
-
-The module requests numbers for:
-
-- Quotations
-- Sales Orders
-- Delivery Notes
-- Invoices
-- Receipts
-- Credit Notes
-- Debit Notes
-- Customer Statements
-
-Numbers must be:
-
-- Tenant-aware
-- Branch-aware where applicable
-- Sequential or rules-based
-- Configurable
-- Locked once issued
-- Non-reusable
-- Auditable
-
----
-
-# 22. Document Management Engine Integration
-
-The Document Management Engine stores official PDFs.
-
-Sales Documents stores only references such as:
-
-- Document File ID
-- Document Version ID
-- Preview File ID
-- Storage Reference
-- Retention Policy Reference
-
-The Document Management Engine owns:
-
-- File storage
-- PDF storage
-- Metadata
-- Versioning
-- Access security
-- Downloads
-- Previews
-- Retention
-
----
-
-# 23. Notification Engine Integration
-
-The Notification Engine sends document-related messages.
-
-Used for:
-
-- Quotation emails
-- Invoice emails
-- Receipt emails
-- Approval alerts
-- Payment reminders
-- Delivery notifications
-- Customer statement emails
-- Reversal notifications
-
-Sales Documents records communication references but does not deliver messages directly.
-
----
-
-# 24. Reference Data Engine Integration
-
-The Reference Data Engine provides all configurable lookup values.
+Sales requests official documents from the Sales Documents Module.
 
 Examples:
 
-- Document Types
-- Document Statuses
-- Payment Terms
-- Delivery Methods
-- Sales Channels
-- Tax Types
-- Discount Types
-- Approval Statuses
-- Currency Types
-- Invoice Types
-- Receipt Types
-- Return Reasons
-
-No sales document lookup values should be hardcoded.
-
----
-
-# 25. Activity & Audit Engine Integration
-
-Every important document action is sent to the Activity & Audit Engine.
-
-Audited actions include:
-
-- Created
-- Updated
-- Submitted
-- Approved
-- Rejected
-- Issued
-- Sent
-- Downloaded
-- Printed
-- Verified
-- Cancelled
-- Voided
-- Reversed
-- Superseded
-
-Audit history must be immutable.
-
----
-
-# 26. Search & Indexing Engine Integration
-
-Issued and searchable draft documents are indexed by the Search & Indexing Engine.
-
-Searchable fields include:
-
-- Document Number
-- Customer Name
-- Customer Number
-- Quotation Number
-- Invoice Number
-- Receipt Number
-- Amount
-- Status
-- Date
-- Branch
-- Salesperson
-
-Search results must respect tenant, branch, and permission rules.
-
----
-
-# 27. Reporting Engine Integration
-
-The Reporting Engine produces:
-
-- Quotation reports
-- Sales order reports
-- Delivery reports
-- Invoice reports
-- Receipt reports
-- Credit note reports
-- Debit note reports
-- Customer statements
-- Revenue dashboards
-- Outstanding receivable reports
-- Verification reports
-
-Sales Documents provides reporting datasets and events.
-
----
-
-# 28. Platform Event Bus Integration
-
-The module publishes events to the Platform Event Bus.
-
-Example events:
-
 ```text
-QuotationCreated
-QuotationSubmitted
-QuotationApproved
-QuotationIssued
-QuotationSent
-
-SalesOrderCreated
-SalesOrderApproved
-SalesOrderIssued
-
-DeliveryNoteCreated
-DeliveryNoteIssued
-
-InvoiceCreated
-InvoiceApproved
-InvoiceIssued
-InvoicePosted
-
-PaymentReceived
-ReceiptIssued
-
-CreditNoteIssued
-DebitNoteIssued
-
-DocumentVerified
-DocumentVoided
-DocumentCancelled
-DocumentSuperseded
+Quotation Request
+Sales Order Request
+Delivery Note Request
+Invoice Request
 ```
 
-Other modules subscribe to these events.
+Sales Documents owns:
+
+- Official document lifecycle
+- Document number generation request
+- QR code
+- Verification code
+- PDF generation
+- Official document storage
+- Document security
+- Document issuance
+
+Sales owns the business reason behind the document request.
 
 ---
 
-# 29. Document Generation Pipeline
+# 22. Inventory Integration
 
-Official document generation follows this pipeline:
+Inventory provides:
 
-```text
-Validate Business Record
-    ↓
-Submit Approval Workflow
-    ↓
-Complete Approval
-    ↓
-Generate Document Number
-    ↓
-Generate Serial Number
-    ↓
-Generate Verification Code
-    ↓
-Generate QR Code
-    ↓
-Generate Digital Hash
-    ↓
-Render PDF
-    ↓
-Store PDF
-    ↓
-Record Audit Event
-    ↓
-Publish Event
-    ↓
-Notify Customer / User
-```
+- Item master
+- Product availability
+- Stock levels
+- Warehouse information
+- Store information
+- Reservations
+- Delivery status
+- Stock movements
+
+Sales requests inventory actions but does not update stock directly.
 
 ---
 
-# 30. Official Document Rules
+# 23. Finance Integration
 
-A document becomes official only when:
+Finance provides:
 
-- Required approvals are completed
-- Document number is generated
-- Document number is locked
-- QR Code is generated
-- Verification code is generated
-- Digital hash is generated
-- PDF is generated
-- PDF is stored
-- Audit event is recorded
-- Document status becomes Issued
+- Customer financial account
+- Credit limit
+- Receivables
+- Payments
+- Receipts
+- Outstanding balance
+- Ledger postings
+- Revenue records
 
-Draft documents are not official.
+Sales uses Finance summaries for commercial decisions.
 
----
-
-# 31. Verification Architecture
-
-```text
-Customer Scans QR Code
-    ↓
-Verification URL Opens
-    ↓
-Verification Code Validated
-    ↓
-Document Metadata Retrieved
-    ↓
-Document Status Checked
-    ↓
-Verification Result Displayed
-    ↓
-Verification Attempt Audited
-```
-
-Verification page displays:
-
-- Document Type
-- Document Number
-- Issuing Company
-- Customer Name
-- Issue Date
-- Amount
-- Status
-- Verification Result
-- Last Verified Date
+Finance owns all accounting impact.
 
 ---
 
-# 32. Document Status Handling
+# 24. Platform Core Integration
 
-Possible verification results:
-
-```text
-Valid
-Cancelled
-Voided
-Expired
-Reversed
-Superseded
-Not Found
-```
-
-The verification service must never expose sensitive internal information.
-
----
-
-# 33. Multi-Tenant Architecture
-
-All document operations are tenant-scoped.
-
-Every record must be linked to:
+Platform Core provides:
 
 - Tenant
 - Company
-- Branch where applicable
-- Created user
-- Issued user
-- Approved user where applicable
+- Branch
+- Department
+- Business Unit
+- User
+- Organization profile
 
-Tenant data isolation is mandatory.
+Used for:
 
----
-
-# 34. Branch-Aware Architecture
-
-Where branch operations are enabled, the module supports branch-level:
-
-- Document numbering
-- Approval routing
-- Sales reporting
-- Inventory fulfillment
-- User visibility
-- Document branding
-- Tax configuration
+- Sales team assignment
+- Branch-based targets
+- Territory ownership
+- User context
+- Company reporting
 
 ---
 
-# 35. Security Architecture
+# 25. Authorization Engine Integration
 
-Security is enforced through:
+The Authorization Engine enforces:
 
-- Authorization Engine
+- Menu access
+- Record access
+- Field access
+- Team visibility
+- Branch visibility
+- Territory visibility
+- Approval authority
+
+Example permissions:
+
+```text
+sales.pipeline.view
+sales.pipeline.manage
+sales.target.view
+sales.target.manage
+sales.pricing.view
+sales.pricing.manage
+sales.discount.request
+sales.discount.approve
+sales.forecast.view
+sales.forecast.manage
+sales.team.manage
+sales.performance.view
+```
+
+---
+
+# 26. Workflow Engine Integration
+
+The Workflow Engine controls approvals for:
+
+- Discount approvals
+- Pricing changes
+- Target approvals
+- Commission approvals
+- Promotion approvals
+- Territory reassignment
+- Sales plan approvals
+
+Sales submits workflow requests but does not own approval logic.
+
+---
+
+# 27. Reference Data Engine Integration
+
+The Reference Data Engine provides configurable values including:
+
+- Sales Channels
+- Sales Regions
+- Sales Territories
+- Sales Stages
+- Sales Statuses
+- Pricing Methods
+- Discount Types
+- Promotion Types
+- Target Types
+- Commission Types
+- Lost Reasons
+- Customer Segments
+
+No lookup values are hardcoded.
+
+---
+
+# 28. Notification Engine Integration
+
+The Notification Engine sends:
+
+- Target assignment notifications
+- Discount approval alerts
+- Pricing approval alerts
+- Pipeline reminders
+- Forecast reminders
+- Promotion alerts
+- Sales performance alerts
+- Customer follow-up reminders
+
+Sales stores notification references only.
+
+---
+
+# 29. Activity & Audit Engine Integration
+
+The Activity & Audit Engine records:
+
+- Pipeline updates
+- Pricing changes
+- Discount requests
+- Discount approvals
+- Target assignments
+- Forecast revisions
+- Territory changes
+- Promotion activations
+- Commission calculations
+
+All critical sales actions are auditable.
+
+---
+
+# 30. Search & Indexing Engine Integration
+
+The Search & Indexing Engine indexes:
+
+- Customers
+- Pipeline records
+- Sales targets
+- Sales teams
+- Territories
+- Price lists
+- Promotions
+- Forecasts
+
+Search respects:
+
 - Tenant isolation
-- Branch access rules
-- Record ownership rules
-- Workflow approval controls
-- Document access policies
-- PDF download permissions
-- Verification code validation
-- Audit logging
+- Branch restrictions
+- Team visibility
+- User permissions
 
 ---
 
-# 36. Data Ownership Summary
+# 31. Reporting Engine Integration
 
-| Data / Capability | Owning Module or Engine          |
-| ----------------- | -------------------------------- |
-| Leads             | CRM                              |
-| Opportunities     | CRM                              |
-| Customers         | CRM / Platform Customer Registry |
-| Quotations        | Sales Documents                  |
-| Sales Orders      | Sales Documents                  |
-| Delivery Notes    | Sales Documents                  |
-| Sales Invoices    | Sales Documents                  |
-| Receipts          | Finance                          |
-| Customer Accounts | Finance                          |
-| Receivables       | Finance                          |
-| Ledger Postings   | Finance                          |
-| Document Numbers  | Document Numbering Engine        |
-| PDFs              | Document Management Engine       |
-| Notifications     | Notification Engine              |
-| Approvals         | Workflow Engine                  |
-| Audit Logs        | Activity & Audit Engine          |
-| Reports           | Reporting Engine                 |
-| Search Indexes    | Search & Indexing Engine         |
+The Reporting Engine produces:
+
+- Sales dashboard
+- Sales pipeline report
+- Sales forecast report
+- Sales target report
+- Sales performance report
+- Territory performance report
+- Salesperson performance report
+- Product sales analysis
+- Customer sales analysis
+- Discount report
+- Promotion performance report
+- Commission report
 
 ---
 
-# 37. Architecture Benefits
+# 32. Platform Event Bus Integration
+
+The Sales Module publishes events such as:
+
+```text
+SalesPipelineCreated
+SalesPipelineUpdated
+SalesStageChanged
+
+SalesTargetAssigned
+SalesTargetUpdated
+
+PricingChanged
+DiscountRequested
+DiscountApproved
+DiscountRejected
+
+PromotionActivated
+PromotionExpired
+
+SalesForecastCreated
+SalesForecastUpdated
+
+SalesOrderRequested
+InvoiceRequested
+
+SalesCompleted
+SalesLost
+```
+
+Other modules subscribe to relevant events.
+
+---
+
+# 33. Sales Pipeline Architecture
+
+```text
+CRM Opportunity
+        │
+        ▼
+Sales Pipeline Record
+        │
+        ▼
+Sales Stage
+        │
+        ▼
+Pricing Review
+        │
+        ▼
+Quotation Request
+        │
+        ▼
+Customer Decision
+        │
+        ▼
+Sales Outcome
+```
+
+The pipeline tracks execution without duplicating CRM ownership.
+
+---
+
+# 34. Pricing Architecture
+
+```text
+Item / Service
+        │
+        ▼
+Price List
+        │
+        ▼
+Customer / Segment Rules
+        │
+        ▼
+Promotion Rules
+        │
+        ▼
+Discount Rules
+        │
+        ▼
+Final Sales Price
+```
+
+Pricing must support:
+
+- Tenant pricing
+- Branch pricing
+- Customer pricing
+- Segment pricing
+- Currency pricing
+- Time-based pricing
+- Promotion pricing
+
+---
+
+# 35. Discount Architecture
+
+```text
+Discount Requested
+        │
+        ▼
+Threshold Check
+        │
+        ├── Within Limit
+        │       ▼
+        │   Auto Approved
+        │
+        └── Above Limit
+                ▼
+            Workflow Approval
+```
+
+Approved discounts are passed to Sales Documents when quotation or invoice requests are created.
+
+---
+
+# 36. Forecasting Architecture
+
+```text
+Pipeline Value
+        │
+        ▼
+Probability Weighting
+        │
+        ▼
+Expected Close Date
+        │
+        ▼
+Forecast Period
+        │
+        ▼
+Forecast Amount
+```
+
+Forecasts are compared against:
+
+- Issued sales orders
+- Issued invoices
+- Finance revenue summaries
+
+---
+
+# 37. Sales Performance Architecture
+
+```text
+Targets
+        │
+        ▼
+Actual Sales
+        │
+        ▼
+Variance
+        │
+        ▼
+Performance Score
+```
+
+Actual sales values come from issued documents and Finance records.
+
+---
+
+# 38. Commission Architecture
+
+```text
+Commission Rule
+        │
+        ▼
+Eligible Sale
+        │
+        ▼
+Calculation
+        │
+        ▼
+Approval
+        │
+        ▼
+Finance / Payroll Processing
+```
+
+Sales calculates eligibility.
+
+Finance or Payroll handles payment.
+
+---
+
+# 39. Data Ownership Summary
+
+| Data / Capability        | Owner                            |
+| ------------------------ | -------------------------------- |
+| Leads                    | CRM                              |
+| Opportunities            | CRM                              |
+| Customers                | CRM                              |
+| Sales Pipeline Execution | Sales                            |
+| Sales Targets            | Sales                            |
+| Sales Teams              | Sales                            |
+| Territories              | Sales                            |
+| Pricing                  | Sales                            |
+| Discounts                | Sales                            |
+| Promotions               | Sales                            |
+| Forecasts                | Sales                            |
+| Official Quotations      | Sales Documents                  |
+| Official Sales Orders    | Sales Documents                  |
+| Delivery Notes           | Sales Documents                  |
+| Invoices                 | Sales Documents / Finance Impact |
+| Stock                    | Inventory                        |
+| Receivables              | Finance                          |
+| Payments                 | Finance                          |
+| Receipts                 | Finance                          |
+| Ledger Entries           | Finance                          |
+| Reports                  | Reporting Engine                 |
+| Search Indexes           | Search & Indexing Engine         |
+| Audit Logs               | Activity & Audit Engine          |
+
+---
+
+# 40. Architecture Benefits
 
 This architecture provides:
 
-- Clear module boundaries
-- Secure document generation
-- Enterprise auditability
-- Tenant-aware document control
-- Configurable approval processes
-- Standardized document verification
-- Strong CRM-to-Finance continuity
-- Reliable customer communication
-- Scalable reporting
-- Future tax authority readiness
-- Future e-signature readiness
+- Clear CRM-to-Sales transition
+- Clean separation from official documents
+- Strong pricing control
+- Controlled discount approvals
+- Better sales visibility
+- Accurate sales forecasting
+- Strong sales performance tracking
+- Reliable downstream coordination
+- Enterprise reporting
+- Multi-tenant scalability
+- Future AI readiness
 
 ---
 
-# 38. Next Document
+# 41. Next Document
 
 The next specification document is:
 
@@ -871,12 +911,15 @@ DATABASE.md
 This document will define:
 
 - Conceptual data model
-- Core tables
-- Document headers
-- Document lines
-- Document relationships
-- Verification records
-- Security metadata
+- Sales pipeline tables
+- Sales teams
+- Sales targets
+- Territories
+- Pricing entities
+- Discount entities
+- Promotion entities
+- Forecasting entities
+- Commission entities
 - Engine references
 - Tenant and branch isolation
 - No SQL implementation yet

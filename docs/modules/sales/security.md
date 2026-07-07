@@ -1,4 +1,4 @@
-# Sales Documents Module - SECURITY.md
+# Sales Module - SECURITY.md
 
 > Business Suite Enterprise Platform
 
@@ -6,156 +6,106 @@
 
 # 1. Security Overview
 
-The Sales Documents Module implements the Business Suite Enterprise Business Document Security Standard.
+The Sales Module implements the enterprise commercial security framework for Business Suite.
 
-The objective is to ensure every official business document is:
+Its objective is to ensure that all sales operations—including pricing, discounts, pipeline execution, forecasting, targets, promotions, territories, commissions, and customer sales intelligence—are secure, auditable, permission-controlled, and tenant-isolated.
 
-- Authentic
-- Traceable
-- Verifiable
-- Auditable
-- Tamper-evident
-- Permission-controlled
-- Tenant-isolated
-- Legally defensible
-- Enterprise compliant
-
-The security architecture is built on Platform Engines and applies consistently across all official business documents.
+Unlike the Sales Documents Module, which secures official business documents, the Sales Module secures commercial decision-making and sales execution.
 
 ---
 
 # 2. Security Objectives
 
-The module is designed to:
+The Sales Module is designed to:
 
-- Prevent unauthorized document creation
-- Prevent unauthorized document approval
-- Prevent document tampering
-- Prevent duplicate document numbering
-- Prevent document forgery
-- Protect customer information
-- Maintain document integrity
-- Provide public verification
-- Maintain complete audit history
-- Support future electronic signatures
-- Support future tax authority integrations
+- Protect commercial information
+- Prevent unauthorized pricing changes
+- Prevent unauthorized discounts
+- Protect sales forecasts
+- Secure customer commercial information
+- Protect commission calculations
+- Secure sales targets
+- Protect territory assignments
+- Enforce workflow approvals
+- Maintain complete auditability
 
 ---
 
 # 3. Security Principles
 
-The module follows these core principles:
+The Sales Module follows:
 
 - Least Privilege
 - Zero Trust
 - Defense in Depth
-- Immutable Issued Documents
 - Separation of Duties
 - Tenant Isolation
 - Branch Isolation
+- Role-Based Access Control
+- Record-Level Security
+- Field-Level Security
 - Complete Auditability
-- Secure by Default
-- Verification by Design
 
 ---
 
 # 4. Security Architecture
 
 ```text
-                    Authorization Engine
-                             │
-                             ▼
-                 Sales Documents Module
-                             │
-      ┌──────────────────────┼──────────────────────┐
-      ▼                      ▼                      ▼
-Workflow Engine     Document Security     Activity & Audit
-      │                      │                      │
-      ▼                      ▼                      ▼
-Document Numbering    Document Management     Notification Engine
+                 Authorization Engine
+                         │
+                         ▼
+                  Sales Module
+                         │
+      ┌──────────────────┼──────────────────┐
+      ▼                  ▼                  ▼
+ Workflow Engine   Activity & Audit   Notification Engine
+      │
+      ▼
+Reference Data Engine
 ```
 
-Each engine owns its own security responsibilities.
+Every commercial action is evaluated against authorization policies before execution.
 
 ---
 
 # 5. Security Ownership
 
-| Capability         | Owner                      |
-| ------------------ | -------------------------- |
-| Authentication     | Platform Authentication    |
-| Authorization      | Authorization Engine       |
-| Roles              | Authorization Engine       |
-| Permissions        | Authorization Engine       |
-| Approval Security  | Workflow Engine            |
-| Document Numbers   | Document Numbering Engine  |
-| PDF Storage        | Document Management Engine |
-| Audit Logs         | Activity & Audit Engine    |
-| Notifications      | Notification Engine        |
-| Search Security    | Search & Indexing Engine   |
-| Reporting Security | Reporting Engine           |
+| Capability         | Owner                    |
+| ------------------ | ------------------------ |
+| Authentication     | Platform Authentication  |
+| Authorization      | Authorization Engine     |
+| Roles              | Authorization Engine     |
+| Permissions        | Authorization Engine     |
+| Approval Workflows | Workflow Engine          |
+| Audit Logs         | Activity & Audit Engine  |
+| Notifications      | Notification Engine      |
+| Reporting Security | Reporting Engine         |
+| Search Security    | Search & Indexing Engine |
 
 ---
 
-# 6. Document Security Model
+# 6. Commercial Data Protection
 
-Every official document must contain:
+The following business information is considered commercially sensitive:
 
-- Official Document Number
-- Internal Serial Number
-- Verification Code
-- QR Code
-- Verification URL
-- Tenant Identifier
-- Company Information
-- Branch Information
-- Customer Information
-- Version Number
-- Digital Hash
-- Watermark
-- Issue Timestamp
-- Print Timestamp
-- Audit Reference
-- System Generated Notice
+- Sales pipeline values
+- Revenue forecasts
+- Sales targets
+- Price lists
+- Customer pricing
+- Discount requests
+- Promotions
+- Commission calculations
+- Customer profitability
+- Sales performance metrics
 
-No official document may be issued without these security elements.
+Access is controlled using the Authorization Engine.
 
 ---
 
-# 7. Official Document Status
+# 7. Authorization Model
 
-Only documents in the **Issued** state are considered official.
-
-```text
-Draft
-    │
-    ▼
-Submitted
-    │
-    ▼
-Approved
-    │
-    ▼
-Issued
-```
-
-Draft and Submitted documents are internal working copies.
-
-Only Issued documents:
-
-- Receive official numbers
-- Receive QR codes
-- Receive verification codes
-- Generate final PDFs
-- Become externally shareable
-
----
-
-# 8. Authorization Model
-
-All document access is controlled by the Authorization Engine.
-
-Authorization evaluates:
+Every operation is validated using:
 
 - User
 - Role
@@ -163,78 +113,86 @@ Authorization evaluates:
 - Tenant
 - Branch
 - Business Unit
+- Territory
+- Team
 - Record Ownership
 - Policy Rules
 
-Every request is evaluated before execution.
+Authorization decisions are evaluated before any business operation.
 
 ---
 
-# 9. Permission Matrix
+# 8. Permission Matrix
 
 Example permissions include:
 
 ```text
-sales.quotation.view
-sales.quotation.create
-sales.quotation.update
-sales.quotation.delete
-sales.quotation.submit
-sales.quotation.approve
-sales.quotation.issue
-sales.quotation.send
+sales.dashboard.view
 
-sales.order.view
-sales.order.create
-sales.order.approve
-sales.order.issue
+sales.pipeline.view
+sales.pipeline.create
+sales.pipeline.update
+sales.pipeline.delete
 
-sales.deliverynote.view
-sales.deliverynote.create
-sales.deliverynote.issue
+sales.team.view
+sales.team.manage
 
-sales.invoice.view
-sales.invoice.create
-sales.invoice.approve
-sales.invoice.issue
+sales.territory.view
+sales.territory.manage
 
-finance.receipt.view
-finance.receipt.create
-finance.receipt.reverse
+sales.target.view
+sales.target.create
+sales.target.update
+sales.target.approve
 
-document.download
-document.print
-document.verify
-document.void
-document.cancel
-document.supersede
+sales.pricing.view
+sales.pricing.manage
+
+sales.discount.request
+sales.discount.approve
+sales.discount.override
+
+sales.promotion.view
+sales.promotion.manage
+
+sales.forecast.view
+sales.forecast.manage
+
+sales.performance.view
+
+sales.commission.view
+sales.commission.manage
+
+sales.analytics.view
+sales.reports.export
 ```
 
 Permissions are configurable per tenant.
 
 ---
 
-# 10. Separation of Duties
+# 9. Separation of Duties
 
-The platform supports segregation of responsibilities.
+The platform supports configurable segregation of responsibilities.
 
-Examples include:
+Examples:
 
-- Creator cannot approve their own document (configurable).
-- Discount approver may differ from quotation approver.
-- Invoice issuer may differ from invoice creator.
-- Receipt reversal requires independent approval.
-- Credit Note approval may require Finance authorization.
+- Sales Representatives request discounts.
+- Sales Managers approve discounts.
+- Pricing Managers maintain price lists.
+- Finance validates commission payouts.
+- Sales Directors approve target revisions.
+- Regional Managers manage territories.
 
-Approval policies are configured through the Workflow Engine.
+Approval responsibilities are configurable using the Workflow Engine.
 
 ---
 
-# 11. Tenant Isolation
+# 10. Tenant Isolation
 
-All document operations are restricted to the active tenant.
+All sales information is isolated by tenant.
 
-Every document is associated with:
+Every commercial entity references:
 
 - Tenant
 - Company
@@ -244,456 +202,422 @@ Cross-tenant access is prohibited.
 
 ---
 
-# 12. Branch Security
+# 11. Branch Security
 
-Branch-aware organizations may restrict access by:
+Branch-aware controls include:
 
-- Branch
-- Warehouse
-- Department
-- Sales Team
-- Business Unit
+- Sales Teams
+- Sales Targets
+- Territories
+- Forecasts
+- Promotions
+- Reports
+- Dashboards
 
-Users only access documents permitted by branch policies.
+Branch visibility is enforced through authorization policies.
 
 ---
 
-# 13. Record-Level Security
+# 12. Territory Security
 
-Users may only access records permitted by authorization policies.
+Organizations may restrict access by sales territory.
 
-Policies may evaluate:
+Users may only access:
 
-- Document Owner
+- Assigned customers
+- Assigned opportunities
+- Assigned pipeline records
+- Assigned targets
+- Assigned promotions
+
+Territory visibility rules are configurable.
+
+---
+
+# 13. Team Security
+
+Sales Teams may have independent access policies.
+
+Examples:
+
+- View own team pipeline
+- View own team forecasts
+- View own team targets
+- View own team performance
+
+Managers may receive broader visibility.
+
+---
+
+# 14. Record-Level Security
+
+Record-level security evaluates:
+
+- Record Owner
 - Salesperson
-- Department
+- Team
+- Territory
 - Branch
+- Department
 - Customer Assignment
-- Approval Stage
-- Business Unit
 
-Record-level security is enforced on all operations.
+Unauthorized users cannot access commercial records.
 
 ---
 
-# 14. Field-Level Security
+# 15. Field-Level Security
 
-Sensitive fields may be protected.
+Sensitive fields may be hidden.
 
 Examples include:
 
 - Cost Price
-- Margin
-- Internal Notes
-- Approval Comments
-- Tax Overrides
-- Discount Percentages
-- Bank Information
-- Verification Metadata
+- Gross Margin
+- Profit Margin
+- Commission Percentage
+- Commission Amount
+- Forecast Probability
+- Revenue Forecast
+- Customer Profitability
+- Internal Pricing Notes
+- Discount Justification
 
-Visibility depends on assigned permissions.
-
----
-
-# 15. Workflow Security
-
-Official documents require controlled approvals.
-
-Workflow security includes:
-
-- Approval Levels
-- Delegation Rules
-- Escalation
-- Approval History
-- Rejection History
-- Digital Approval Trail
-
-No document bypasses configured workflow requirements.
+Visibility depends on permissions.
 
 ---
 
-# 16. Document Number Security
+# 16. Pricing Security
 
-Document numbers are generated only by the Document Numbering Engine.
+Pricing is protected using:
 
-Security rules:
+- Approval workflows
+- Effective dates
+- Price history
+- Audit history
+- Field restrictions
+- Role permissions
 
-- Unique
-- Non-reusable
-- Sequential or configured
-- Tenant-aware
-- Branch-aware
-- Locked after issuance
-- Fully auditable
-
-Manual numbering is prohibited.
+Unauthorized price modifications are prohibited.
 
 ---
 
-# 17. Internal Serial Number
+# 17. Customer Pricing Security
 
-Every official document includes an internal serial number.
+Customer-specific pricing requires controlled access.
 
-Purpose:
+Security includes:
 
-- Internal tracking
-- Cross-engine references
-- Fraud detection
-- Duplicate prevention
+- Customer assignment validation
+- Pricing approval
+- Effective period validation
+- Historical pricing preservation
 
-Serial numbers are immutable.
-
----
-
-# 18. QR Code Security
-
-Every official document includes a secure QR Code.
-
-The QR Code contains only the verification URL and never exposes sensitive document data directly.
-
-Example:
-
-```text
-https://businesssuite.app/verify/{verification_code}
-```
-
-QR Codes are regenerated only when a new official document version is issued.
+Expired pricing cannot be reused.
 
 ---
 
-# 19. Verification Code Security
+# 18. Discount Security
 
-Verification codes must be:
+Discounts are controlled through configurable approval thresholds.
 
-- Globally unique
-- Random
-- Non-sequential
-- Difficult to guess
-- Immutable
-- Bound to a specific document version
+Business Rules:
 
-Verification codes cannot be reused.
+- Discounts within configured limits may be auto-approved.
+- Discounts above thresholds require workflow approval.
+- Override permissions are restricted.
+- Approved discounts remain historically auditable.
 
 ---
 
-# 20. Verification Service
+# 19. Promotion Security
 
-The public verification service validates document authenticity.
+Promotion management includes:
 
-Verification displays:
+- Promotion approval
+- Activation control
+- Effective period validation
+- Territory restrictions
+- Customer segment restrictions
 
-- Document Type
-- Document Number
-- Issuing Company
-- Customer Name
-- Issue Date
-- Amount
-- Status
-- Verification Result
-- Last Verified Date
-
-No confidential internal data is exposed.
+Expired promotions become read-only.
 
 ---
 
-# 21. Verification Results
+# 20. Forecast Security
 
-Supported verification outcomes:
+Sales forecasts are commercially sensitive.
 
-```text
-Valid
+Organizations may restrict visibility by:
 
-Cancelled
+- Salesperson
+- Team
+- Branch
+- Territory
+- Management Level
 
-Voided
-
-Expired
-
-Reversed
-
-Superseded
-
-Not Found
-```
-
-The verification result is determined in real time using the current document state.
+Forecast revisions are audited.
 
 ---
 
-# 22. Digital Hash Strategy
+# 21. Target Security
 
-Every issued document includes a Digital Hash.
+Target management supports:
 
-The Digital Hash is calculated using the final issued document content.
+- Approval workflows
+- Revision history
+- Assignment controls
+- Read-only historical periods
 
-It is used to:
-
-- Detect tampering
-- Verify integrity
-- Compare document versions
-- Support future digital signature implementations
-
-A new hash is generated only for a new official version.
+Completed periods cannot be modified without authorized administrative procedures.
 
 ---
 
-# 23. Watermark Standard
+# 22. Commission Security
 
-Watermarks visually indicate document state.
+Commission information is highly restricted.
 
-Examples:
+Access may be limited to:
 
-```text
-DRAFT
+- Sales Managers
+- Finance Managers
+- HR Managers
+- Executive Management
 
-COPY
-
-VOID
-
-CANCELLED
-
-SUPERSEDED
-
-REVERSED
-```
-
-Issued originals have no watermark unless required by tenant policy.
+Commission rules require workflow approval where configured.
 
 ---
 
-# 24. Version Control
+# 23. Customer Sales Insight Security
 
-Document versions are immutable.
+Customer sales analytics may include:
 
-Versioning rules:
+- Revenue
+- Purchase trends
+- Profitability
+- Product preferences
+- Lifetime value
 
-- Draft versions may be edited.
-- Issued versions cannot be modified.
-- Corrections require a new version or a corrective business document.
-- Version history remains permanently available.
-
----
-
-# 25. PDF Security
-
-Official PDFs are generated once issued.
-
-Security measures include:
-
-- Secure storage
-- Version tracking
-- Download authorization
-- Print tracking
-- Integrity validation
-- Retention policies
-
-PDFs are stored exclusively by the Document Management Engine.
+Visibility depends on customer assignment and commercial permissions.
 
 ---
 
-# 26. Print Security
+# 24. Workflow Security
 
-Printing is controlled through permissions.
+Workflow-controlled actions include:
 
-Each print action records:
+- Discount approvals
+- Pricing approvals
+- Promotion approvals
+- Target approvals
+- Territory reassignment
+- Commission approvals
 
-- User
-- Date
-- Time
-- Document
-- Print Count
-- Print Reason (optional)
-
-Organizations may restrict repeated printing by policy.
+Workflow execution is owned by the Workflow Engine.
 
 ---
 
-# 27. Download Security
-
-Document downloads require authorization.
-
-Download controls include:
-
-- Permission validation
-- Tenant validation
-- Branch validation
-- Record validation
-- Audit logging
-
-Unauthorized downloads are denied and logged.
-
----
-
-# 28. Communication Security
-
-Document distribution uses the Notification Engine.
-
-Supported channels:
-
-- Email
-- SMS
-- Push Notifications
-- In-App Notifications
-
-Communication history references are stored by the Sales Documents Module.
-
----
-
-# 29. Search Security
+# 25. Search Security
 
 Search results are filtered using:
 
 - Tenant
 - Branch
-- Permissions
+- Territory
+- Team
+- Role
 - Record Ownership
-- Workflow Visibility
 
-Sensitive documents are never returned to unauthorized users.
+Unauthorized records never appear in search results.
 
 ---
 
-# 30. Reporting Security
+# 26. Reporting Security
 
-Reports inherit document security.
+Reports inherit authorization policies.
 
-Users only view:
+Users may only access reports for:
 
 - Authorized branches
-- Authorized departments
+- Authorized territories
+- Authorized teams
 - Authorized customers
-- Authorized document types
+- Authorized business units
 
-Reporting security is enforced by the Reporting Engine.
-
----
-
-# 31. Fraud Prevention
-
-The platform reduces fraud through:
-
-- Immutable document numbers
-- QR Code verification
-- Verification codes
-- Digital hashes
-- Workflow approvals
-- Audit history
-- Controlled numbering
-- Version tracking
-- Public verification
-
-Fraudulent or altered documents can be detected quickly.
+Sensitive reports may require additional permissions.
 
 ---
 
-# 32. Document Integrity Rules
+# 27. Notification Security
 
-After issuance:
+The Notification Engine delivers:
 
-- Customer snapshots cannot change.
-- Pricing snapshots cannot change.
-- Taxes cannot change.
-- Discounts cannot change.
-- Document numbers cannot change.
-- Verification codes cannot change.
-- QR Codes cannot change.
-- Hash values cannot change.
+- Target assignments
+- Discount approvals
+- Promotion approvals
+- Forecast reminders
+- Pipeline reminders
+- Sales alerts
 
-Business corrections require new controlled documents.
+Only authorized users receive confidential notifications.
 
 ---
 
-# 33. Audit Security
+# 28. Audit Requirements
 
-Every critical action is recorded.
+Every critical commercial action generates an immutable audit event.
 
 Audited actions include:
 
 - Create
 - Update
-- Submit
+- Delete
+- Assign
 - Approve
 - Reject
-- Issue
-- Send
-- Download
-- Print
-- Verify
-- Void
-- Cancel
-- Reverse
-- Supersede
+- Activate
+- Deactivate
+- Override
+- Recalculate
+- Import
+- Export
 
-Audit records are immutable.
+Audit records are maintained by the Activity & Audit Engine.
 
 ---
 
-# 34. Compliance Requirements
+# 29. Fraud Prevention
 
-The module supports compliance by ensuring:
+The Sales Module reduces commercial fraud through:
+
+- Approval workflows
+- Role separation
+- Price history
+- Discount limits
+- Audit logging
+- Customer assignment validation
+- Territory restrictions
+- Forecast revision history
+- Commission approval
+
+Unauthorized commercial changes are detectable and traceable.
+
+---
+
+# 30. Data Integrity Rules
+
+The module enforces:
+
+- Historical price preservation
+- Historical target preservation
+- Historical commission preservation
+- Historical promotion preservation
+- Historical forecast revisions
+- Historical pipeline history
+
+Historical records remain available for reporting and auditing.
+
+---
+
+# 31. Export Security
+
+Exporting commercial data requires explicit permissions.
+
+Supported exports include:
+
+- PDF
+- Excel
+- CSV
+
+Organizations may restrict:
+
+- Customer pricing exports
+- Forecast exports
+- Commission exports
+- Customer profitability reports
+
+Export actions are audited.
+
+---
+
+# 32. API Security
+
+All Sales Module APIs must enforce:
+
+- Authentication
+- Authorization
+- Tenant validation
+- Branch validation
+- Input validation
+- Rate limiting
+- Audit logging
+
+Every API request is evaluated using platform security policies.
+
+---
+
+# 33. Compliance Requirements
+
+The Sales Module supports compliance by providing:
 
 - Complete audit history
-- Traceable approvals
-- Immutable issued documents
-- Secure document storage
-- Version history
-- Public verification
-- Controlled access
+- Historical revisions
+- Controlled approvals
+- Record ownership
+- Commercial traceability
 - Tenant isolation
-- Data retention support
+- Role-based access
+- Secure reporting
 
 Future compliance integrations may include:
 
-- Electronic signatures
-- National tax authority systems
-- Certified electronic invoicing
-- Long-term digital archiving
+- AI governance
+- Regulatory reporting
+- Sales incentive compliance
+- Revenue recognition controls
 
 ---
 
-# 35. Security Events
+# 34. Security Events
 
-The module publishes security-related events to the Platform Event Bus.
+The module publishes security-related events through the Platform Event Bus.
 
 Examples include:
 
 ```text
-DocumentIssued
-DocumentVerified
-DocumentDownloaded
-DocumentPrinted
-DocumentVoided
-DocumentCancelled
-DocumentReversed
-DocumentSuperseded
-UnauthorizedDocumentAccess
-VerificationFailed
+PricingChanged
+PricingOverrideAttempted
+DiscountRequested
+DiscountApproved
+DiscountRejected
+PromotionActivated
+PromotionExpired
+ForecastUpdated
+TargetAssigned
+CommissionCalculated
+UnauthorizedSalesAccess
+SalesExportCompleted
 ```
 
-These events enable monitoring, alerts, analytics, and integrations.
+These events support monitoring, alerts, and analytics.
 
 ---
 
-# 36. Security Summary
+# 35. Security Summary
 
-The Sales Documents Module combines:
+The Sales Module secures commercial execution by combining:
 
 - Authorization Engine
 - Workflow Engine
-- Document Numbering Engine
-- Document Management Engine
 - Activity & Audit Engine
 - Notification Engine
-- Search & Indexing Engine
 - Reporting Engine
+- Search & Indexing Engine
 
-to create a comprehensive enterprise document security model.
-
-Every official document is uniquely identifiable, verifiable, protected against unauthorized modification, and fully traceable throughout its lifecycle.
+This architecture protects sensitive commercial data while enabling secure collaboration across sales teams, branches, territories, and management.
 
 ---
 
-# 37. Next Document
+# 36. Next Document
 
 The next specification document is:
 
@@ -703,17 +627,13 @@ UI.md
 
 This document will define:
 
-- User Interface Architecture
-- Navigation Structure
-- Screens
-- Document Workspace
-- Document Viewer
-- Approval Interfaces
-- Verification Page
-- Responsive Design
-- User Experience Standards
-- Module Navigation
-
-```
-
-```
+- Sales Workspace
+- Dashboard
+- Pipeline Interface
+- Pricing Screens
+- Target Management
+- Territory Management
+- Team Management
+- Forecasting Views
+- Sales Analytics
+- Responsive User Experience

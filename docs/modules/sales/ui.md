@@ -1,4 +1,4 @@
-# Sales Documents Module - UI.md
+# Sales Module - UI.md
 
 > Business Suite Enterprise Platform
 
@@ -6,39 +6,36 @@
 
 # 1. User Interface Overview
 
-The Sales Documents Module provides a unified enterprise document workspace for creating, reviewing, approving, issuing, verifying, and managing all official sales documents.
+The Sales Module provides a unified commercial workspace for planning, executing, monitoring, and optimizing the organization's sales operations.
 
-The interface follows the Business Suite Design System and remains consistent across all modules.
+The interface follows the Business Suite Design System and provides a consistent experience across CRM, Sales Documents, Inventory, Finance, and other Business Suite modules.
 
-Design principles include:
+The UI is designed to support:
 
-- Clean
-- Responsive
-- Enterprise-grade
-- Keyboard friendly
-- Mobile ready
-- Accessible
-- Consistent
-- Fast navigation
-- Minimal clicks
-- Context-aware
+- Sales Representatives
+- Sales Managers
+- Regional Managers
+- Branch Managers
+- Pricing Managers
+- Commercial Directors
+- Executives
 
 ---
 
 # 2. UI Design Principles
 
-The interface is built around the following principles:
+The Sales Module follows these design principles:
 
-- Single Document Workspace
-- Contextual Actions
+- Single Commercial Workspace
+- Dashboard-Driven Navigation
+- Context-Aware Actions
+- Role-Based User Experience
 - Progressive Disclosure
-- Consistent Navigation
-- Reusable Components
-- Role-Based Visibility
-- Workflow Awareness
-- Status-Driven Actions
-- Real-Time Updates
-- Engine Integration
+- Responsive Design
+- Real-Time Metrics
+- Configurable Layouts
+- Enterprise Consistency
+- Minimal Navigation Depth
 
 ---
 
@@ -49,102 +46,127 @@ Sales
 │
 ├── Dashboard
 │
-├── Quotations
+├── Sales Pipeline
 │
-├── Sales Orders
+├── Pricing
 │
-├── Delivery Notes
+├── Discounts
 │
-├── Sales Invoices
+├── Promotions
 │
-├── Customer Statements
+├── Sales Targets
 │
-├── Document Verification
+├── Sales Teams
+│
+├── Territories
+│
+├── Forecasting
+│
+├── Performance
+│
+├── Customer Sales
+│
+├── Analytics
 │
 ├── Reports
 │
 └── Settings
 ```
 
-Finance continues to own:
+The module intentionally does **not** include:
 
 ```text
-Finance
-
-├── Receivables
-├── Payments
-├── Receipts
-├── Credit Notes
-├── Debit Notes
+Quotations
+Sales Orders
+Delivery Notes
+Invoices
+Receipts
 ```
+
+These are managed by the **Sales Documents Module** and **Finance Module**, with navigation links available where appropriate.
 
 ---
 
-# 4. Module Dashboard
+# 4. Sales Dashboard
 
-The dashboard provides a real-time overview of document activity.
+The Sales Dashboard provides an executive view of commercial performance.
 
-Widgets include:
+Dashboard widgets include:
 
-- Quotations Awaiting Approval
-- Sales Orders Pending
-- Deliveries Due
-- Invoices Awaiting Approval
-- Recently Issued Documents
-- Documents Sent Today
-- Expiring Quotations
-- Outstanding Customer Statements
-- Document Verification Statistics
-- Revenue Summary
-- Approval Queue
-- Recent Activity
+### Pipeline
 
-Dashboard filters:
+- Active Opportunities
+- Qualified Opportunities
+- Pipeline Value
+- Weighted Pipeline
+- Average Deal Size
+- Win Rate
 
-- Tenant
-- Company
-- Branch
-- Salesperson
-- Customer
-- Date Range
-- Status
+### Revenue
+
+- Revenue Today
+- Revenue This Month
+- Revenue This Quarter
+- Revenue This Year
+
+### Targets
+
+- Target Achievement
+- Team Performance
+- Branch Performance
+- Territory Performance
+
+### Forecast
+
+- Forecast Revenue
+- Committed Revenue
+- Best Case Revenue
+- Variance
+
+### Activities
+
+- Upcoming Follow-Ups
+- Overdue Activities
+- Discount Requests
+- Pending Pricing Approvals
 
 ---
 
 # 5. Common Screen Layout
 
-All document screens follow the same layout.
+All screens follow a standard layout.
 
 ```text
-------------------------------------------------------
+------------------------------------------------
 
 Breadcrumb
 
-Screen Title
+Page Title
 
 Toolbar
 
-------------------------------------------------------
+------------------------------------------------
 
 Search
+
 Filters
 
-------------------------------------------------------
+------------------------------------------------
 
 Data Grid
 
-------------------------------------------------------
+------------------------------------------------
 
 Pagination
 
-------------------------------------------------------
+------------------------------------------------
 ```
 
 ---
 
-# 6. Document Workspace
+# 6. Sales Workspace
 
-Every document uses the same workspace.
+The Sales Workspace provides a centralized view of a commercial sales record.
 
 ```text
 --------------------------------------------------
@@ -153,23 +175,27 @@ Header
 
 --------------------------------------------------
 
-Document Summary
+Customer Summary
 
 --------------------------------------------------
 
-Customer Information
+Pipeline Details
 
 --------------------------------------------------
 
-Document Items
+Pricing
 
 --------------------------------------------------
 
-Totals
+Discounts
 
 --------------------------------------------------
 
-Workflow Panel
+Forecast
+
+--------------------------------------------------
+
+Performance
 
 --------------------------------------------------
 
@@ -177,415 +203,397 @@ Activity Timeline
 
 --------------------------------------------------
 
-Attachments
+Related Documents
 
 --------------------------------------------------
 
-Communication History
-
---------------------------------------------------
 ```
-
-The workspace adapts according to document type.
 
 ---
 
-# 7. Document Header
+# 7. Header Panel
 
 Displays:
 
-- Document Number
-- Status Badge
 - Customer
-- Currency
-- Branch
+- Opportunity
+- Pipeline Stage
 - Salesperson
-- Issue Date
-- Valid Until
-- Workflow Status
-- Version
-- QR Status
+- Team
+- Territory
+- Expected Close Date
+- Estimated Revenue
+- Probability
+- Status
 
-Header actions are permission-aware.
+Contextual actions appear based on permissions.
 
 ---
 
 # 8. Global Toolbar
 
-Common actions include:
+Available actions include:
 
 - New
 - Edit
-- Save Draft
+- Save
 - Submit
-- Approve
-- Reject
-- Issue
-- Send
-- Download PDF
-- Print
-- Verify
-- Clone
-- Cancel
-- Void
-- More Actions
+- Request Discount
+- Create Promotion
+- Create Forecast
+- Assign Target
+- View Customer
+- View Related Documents
+- Export
+- Refresh
 
-Unavailable actions are automatically hidden or disabled based on document status and permissions.
+Actions are automatically hidden when unavailable.
 
 ---
 
-# 9. Document List Screen
+# 9. Sales Pipeline Screen
 
-Every document type has a dedicated list page.
+Displays:
 
-Example:
-
-```text
-Sales Invoices
-
------------------------------------------
-
-Search
-
-Filters
-
------------------------------------------
-
-Invoice Number
-
-Customer
-
-Amount
-
-Status
-
-Issue Date
-
-Salesperson
-
-Branch
-
------------------------------------------
-
-Actions
-
------------------------------------------
-```
-
----
-
-# 10. Advanced Filters
-
-Supported filters include:
-
+- Opportunity
 - Customer
-- Customer Category
-- Salesperson
-- Branch
-- Currency
-- Status
-- Workflow Stage
-- Issue Date
-- Expiry Date
-- Amount Range
-- Payment Terms
-- Document Type
-- Sales Channel
+- Stage
+- Probability
+- Estimated Revenue
+- Expected Close Date
+- Assigned Salesperson
+- Team
+- Territory
+- Next Activity
 
-Filters can be saved as personal views.
+Views supported:
+
+- Grid View
+- Kanban View
+- Timeline View
+- Calendar View
 
 ---
 
-# 11. Document Creation Wizard
+# 10. Kanban Pipeline View
 
-New documents follow a guided workflow.
+Default visual pipeline.
+
+```text
+Qualified
+
+Negotiation
+
+Proposal
+
+Customer Review
+
+Won
+
+Lost
+```
+
+Users drag opportunities between stages.
+
+Stage movement updates:
+
+- Forecast
+- Pipeline Metrics
+- CRM Timeline
+- Sales Analytics
+
+---
+
+# 11. Pipeline Details Screen
+
+Displays:
+
+### Customer
+
+- Name
+- Contact
+- Credit Summary
+- Lifetime Revenue
+
+### Opportunity
+
+- Opportunity Value
+- Stage
+- Probability
+- Expected Close Date
+
+### Commercial
+
+- Pricing
+- Discounts
+- Promotions
+- Forecast
+
+### Related Documents
+
+- Quotations
+- Sales Orders
+- Delivery Notes
+- Invoices
+
+These are displayed as references from the Sales Documents Module.
+
+---
+
+# 12. Pricing Screen
+
+Displays:
+
+- Price Lists
+- Customer Pricing
+- Product Pricing
+- Effective Dates
+- Currency
+- Pricing Method
+
+Actions:
+
+- New Price List
+- Edit
+- Activate
+- Deactivate
+- Submit for Approval
+
+---
+
+# 13. Discount Screen
+
+Displays:
+
+- Discount Requests
+- Requested Value
+- Approved Value
+- Workflow Status
+- Approval History
+
+Managers see:
+
+- Pending Requests
+- Approval Actions
+- Comments
+- Threshold Indicators
+
+---
+
+# 14. Promotion Screen
+
+Displays:
+
+- Active Promotions
+- Upcoming Promotions
+- Expired Promotions
+
+Promotion details include:
+
+- Promotion Type
+- Territory
+- Customer Segment
+- Products
+- Effective Dates
+
+---
+
+# 15. Sales Target Screen
+
+Displays:
+
+- Assigned Target
+- Achieved Value
+- Remaining Value
+- Progress
+- Target Period
+- Team
+- Territory
+
+Progress indicators include:
+
+- Percentage Complete
+- Trend
+- Forecast Achievement
+
+---
+
+# 16. Sales Team Screen
+
+Displays:
+
+- Team Name
+- Manager
+- Members
+- Branch
+- Territory
+- Revenue
+- Target Achievement
+
+Actions:
+
+- Create Team
+- Assign Members
+- Transfer Members
+- View Performance
+
+---
+
+# 17. Territory Screen
+
+Displays:
+
+- Territory
+- Region
+- Branch
+- Assigned Manager
+- Sales Representatives
+- Revenue
+- Customer Count
+
+Map integration is planned for future releases.
+
+---
+
+# 18. Forecast Screen
+
+Displays:
+
+- Forecast Period
+- Expected Revenue
+- Weighted Revenue
+- Committed Revenue
+- Best Case Revenue
+
+Comparison charts:
+
+- Forecast vs Actual
+- Forecast vs Target
+- Branch Comparison
+
+---
+
+# 19. Performance Screen
+
+Displays KPIs including:
+
+- Revenue
+- Target Achievement
+- Conversion Rate
+- Average Deal Size
+- Sales Cycle
+- Customer Retention
+- Win Rate
+
+Performance can be filtered by:
+
+- Salesperson
+- Team
+- Territory
+- Branch
+- Period
+
+---
+
+# 20. Customer Sales Screen
+
+Displays commercial customer insights.
+
+Includes:
+
+- Sales History
+- Revenue Trend
+- Product Preferences
+- Average Order Value
+- Outstanding Balance (Finance)
+- Recent Quotations
+- Recent Orders
+- Recent Invoices
+
+Customer profile data is retrieved from CRM.
+
+Financial summaries are retrieved from Finance.
+
+---
+
+# 21. Related Documents Panel
+
+The Sales Module references official documents.
+
+Displays:
+
+- Quotation
+- Sales Order
+- Delivery Note
+- Sales Invoice
+
+Actions:
+
+- Open Document
+- View Status
+- Track Progress
+
+Editing occurs within the Sales Documents Module.
+
+---
+
+# 22. Activity Timeline
+
+Displays chronological activity.
 
 Example:
 
 ```text
-Step 1
-
-Customer
+Opportunity Qualified
 
 ↓
 
-Step 2
-
-Items
+Pricing Updated
 
 ↓
 
-Step 3
-
-Pricing
+Discount Requested
 
 ↓
 
-Step 4
-
-Review
+Discount Approved
 
 ↓
 
-Step 5
-
-Save Draft
-```
-
-Optional steps appear depending on tenant configuration.
-
----
-
-# 12. Customer Information Card
-
-Displays:
-
-- Customer Name
-- Customer Number
-- Customer Category
-- Contact Person
-- Phone
-- Email
-- Billing Address
-- Shipping Address
-- Outstanding Balance
-- Credit Limit
-
-Data is read from CRM.
-
----
-
-# 13. Document Items Grid
-
-Supports:
-
-- Product lookup
-- Service lookup
-- Quantity
-- Unit Price
-- Discount
-- Tax
-- Warehouse
-- Unit of Measure
-- Total
-
-Grid features:
-
-- Inline editing
-- Keyboard navigation
-- Row duplication
-- Drag ordering
-- Bulk delete
-
----
-
-# 14. Totals Panel
-
-Displays:
-
-- Subtotal
-- Discounts
-- Taxes
-- Shipping
-- Additional Charges
-- Grand Total
-- Outstanding Amount
-
-All totals update in real time.
-
----
-
-# 15. Workflow Panel
-
-Displays:
-
-- Current Stage
-- Approval Level
-- Assigned Approver
-- Previous Decisions
-- Approval Comments
-- Next Step
-
-Workflow information is read from the Workflow Engine.
-
----
-
-# 16. Activity Timeline
-
-Shows chronological events.
-
-Examples:
-
-```text
-Created
+Quotation Requested
 
 ↓
 
-Submitted
+Customer Negotiation
 
 ↓
 
-Approved
+Customer Accepted
 
 ↓
 
-Issued
-
-↓
-
-Sent
-
-↓
-
-Viewed
-
-↓
-
-Downloaded
-
-↓
-
-Verified
+Sales Completed
 ```
 
 Timeline data comes from the Activity & Audit Engine.
 
 ---
 
-# 17. Communication Panel
+# 23. Analytics Dashboard
 
-Displays:
+Charts include:
 
-- Emails Sent
-- SMS Sent
-- Push Notifications
-- Delivery Status
-- Delivery Time
-- Recipient
+- Sales by Branch
+- Sales by Territory
+- Sales by Team
+- Sales by Product Category
+- Revenue Trend
+- Win/Loss Analysis
+- Pipeline Funnel
+- Forecast Accuracy
+- Customer Growth
 
-Data is retrieved from the Notification Engine.
-
----
-
-# 18. Attachments Panel
-
-Displays linked files.
-
-Examples:
-
-- Purchase Order
-- Signed Delivery Note
-- Customer Approval
-- Supporting Documents
-
-File management is provided by the Document Management Engine.
-
----
-
-# 19. Document Viewer
-
-The integrated document viewer provides:
-
-- PDF Preview
-- Zoom
-- Rotate
-- Page Navigation
-- Download
-- Print
-- Version Selection
-- Verification Summary
-
-The viewer never edits issued PDFs.
-
----
-
-# 20. QR Code Panel
-
-Displays:
-
-- QR Code
-- Verification Code
-- Verification URL
-- Verification Status
-- Last Verified Date
-
-Quick actions:
-
-- Open Verification Page
-- Copy Verification Link
-
----
-
-# 21. Verification Page
-
-Public verification page displays:
-
-- Company Name
-- Logo
-- Document Type
-- Document Number
-- Customer Name
-- Issue Date
-- Amount
-- Current Status
-- Verification Result
-
-Possible results:
-
-```text
-Valid
-
-Cancelled
-
-Voided
-
-Expired
-
-Reversed
-
-Superseded
-
-Not Found
-```
-
-No confidential business data is displayed.
-
----
-
-# 22. Approval Screens
-
-Approvers see:
-
-- Pending Documents
-- Approval Queue
-- Approval History
-- Comments
-- Risk Indicators
-- Discount Summary
-- Financial Impact
-
-Available actions:
-
-- Approve
-- Reject
-- Request Changes
-- Delegate
-
----
-
-# 23. Dashboard Cards
-
-Examples include:
-
-- Quotations This Month
-- Orders This Month
-- Invoices This Month
-- Revenue
-- Outstanding Receivables
-- Pending Deliveries
-- Pending Approvals
-- Expired Quotations
-- Verification Requests
+All charts support filtering.
 
 ---
 
@@ -593,211 +601,218 @@ Examples include:
 
 Global search supports:
 
-- Document Number
-- Customer Name
-- Customer Number
-- Opportunity Number
-- Invoice Number
-- Receipt Number
-- Sales Order Number
+- Customer
+- Opportunity
+- Salesperson
+- Team
+- Territory
+- Target
+- Promotion
+- Price List
 
-Results are grouped by document type.
+Results are grouped by entity type.
 
 Search permissions are enforced by the Search & Indexing Engine.
 
 ---
 
-# 25. Status Indicators
+# 25. Filters
 
-Standard badges:
+Advanced filters include:
+
+- Branch
+- Team
+- Territory
+- Salesperson
+- Customer
+- Opportunity Stage
+- Sales Channel
+- Target Type
+- Promotion
+- Currency
+- Date Range
+
+Users can save personal filter presets.
+
+---
+
+# 26. Status Indicators
+
+Standard status badges include:
 
 ```text
-Draft
+Active
 
-Submitted
+Pending Approval
 
 Approved
 
-Issued
-
-Sent
-
-Accepted
-
-Paid
-
-Closed
-
 Rejected
+
+Won
+
+Lost
+
+Completed
 
 Cancelled
 
-Voided
-
 Expired
 
-Reversed
-
-Superseded
+Archived
 ```
 
-Each status uses consistent platform colors.
+Platform color standards are applied consistently.
 
 ---
 
-# 26. Responsive Design
+# 27. Notifications
 
-Desktop:
+Real-time notifications include:
 
-- Multi-column workspace
-- Side panels
-- Split views
+- New Target Assigned
+- Discount Approval Required
+- Promotion Approved
+- Pipeline Stage Changed
+- Forecast Due
+- Pricing Approval Required
+- Sales Goal Achieved
 
-Tablet:
+Notifications are delivered through the Notification Engine.
+
+---
+
+# 28. Responsive Design
+
+### Desktop
+
+- Multi-panel layout
+- Large dashboards
+- Advanced analytics
+
+### Tablet
 
 - Collapsible panels
-- Optimized grids
+- Optimized tables
+- Touch-friendly navigation
 
-Mobile:
+### Mobile
 
 - Single-column layout
-- Floating actions
-- Touch-optimized controls
+- Card-based lists
+- Floating action buttons
+- Quick KPI summary
+
+The design supports future Progressive Web App (PWA) and native mobile applications.
 
 ---
 
-# 27. Accessibility
+# 29. Accessibility
 
 The UI supports:
 
 - Keyboard navigation
 - Screen readers
 - High contrast mode
-- Scalable fonts
 - Focus indicators
 - ARIA labels
+- Scalable text
+- Accessible charts
 - Color-independent status indicators
 
-Accessibility standards apply across all screens.
+Accessibility standards apply across the entire module.
 
 ---
 
-# 28. Personalization
+# 30. Personalization
 
-Users can configure:
+Users may configure:
 
-- Saved filters
-- Default branch
-- Default currency
-- Grid columns
-- Page size
 - Dashboard layout
-- Favorite reports
+- Favorite KPIs
+- Default filters
+- Default branch
+- Preferred currency
+- Grid columns
+- Saved views
 
 Preferences are stored per user.
 
 ---
 
-# 29. Notifications
-
-Real-time notifications include:
-
-- Approval Required
-- Document Approved
-- Document Rejected
-- Document Issued
-- Customer Viewed Document
-- Payment Received
-- Receipt Issued
-- Verification Attempt Failed
-
-Notifications are delivered by the Notification Engine.
-
----
-
-# 30. Error Handling
-
-Validation errors are displayed inline.
-
-Examples:
-
-- Required field missing
-- Invalid quantity
-- Credit limit exceeded
-- Approval required
-- Duplicate document reference
-- Invalid workflow state
-
-System errors include reference IDs for support.
-
----
-
 # 31. Role-Based User Experience
-
-The interface adapts based on permissions.
-
-Examples:
 
 ### Sales Representative
 
-- Create Quotations
-- View Own Documents
-- Submit for Approval
+- Manage pipeline
+- Request discounts
+- View targets
+- View pricing
+- View assigned customers
 
 ### Sales Manager
 
-- Approve Quotations
-- Approve Orders
-- Issue Documents
-- View Team Documents
+- Approve discounts
+- Manage teams
+- Review forecasts
+- Monitor performance
 
-### Finance Officer
+### Regional Manager
 
-- View Issued Invoices
-- Manage Receivables
-- Issue Receipts
+- Manage territories
+- Compare branch performance
+- Review regional targets
 
-### Finance Manager
+### Pricing Manager
 
-- Approve Credit Notes
-- Approve Debit Notes
-- Reverse Receipts
+- Manage price lists
+- Approve pricing
+- Configure pricing rules
+
+### Commercial Director
+
+- Executive dashboard
+- Sales analytics
+- Forecast review
+- Target approvals
+- Promotion approvals
 
 ### Administrator
 
-- Full Module Access
+- Full module administration
 - Configuration
-- Templates
-- Security Settings
+- Security
+- Reference data
 
-Menus, actions, fields, and dashboards are automatically tailored to the user's permissions.
+Menus, actions, and fields automatically adapt to assigned permissions.
 
 ---
 
-# 32. UI Integration with Platform Engines
+# 32. UI Integration with Platform Components
 
-| Platform Engine            | UI Integration                     |
-| -------------------------- | ---------------------------------- |
-| Platform Core              | Company, Branch, User Context      |
-| CRM Module                 | Customer & Opportunity Information |
-| Authorization Engine       | Menu, Buttons, Field Visibility    |
-| Workflow Engine            | Approval Panel & Tasks             |
-| Document Numbering Engine  | Display Official Numbers           |
-| Document Management Engine | PDF Viewer & Attachments           |
-| Notification Engine        | Communication History              |
-| Reference Data Engine      | Dropdown Lists & Configurations    |
-| Activity & Audit Engine    | Activity Timeline                  |
-| Search & Indexing Engine   | Global Search                      |
-| Reporting Engine           | Dashboards & Reports               |
-| Platform Event Bus         | Real-Time UI Refresh               |
+| Component                | UI Integration                                      |
+| ------------------------ | --------------------------------------------------- |
+| CRM Module               | Customer, Opportunity & Contact Information         |
+| Sales Documents Module   | Related Document References                         |
+| Inventory Module         | Product Availability & Fulfillment Status           |
+| Finance Module           | Credit Limit, Outstanding Balance & Revenue Summary |
+| Platform Core            | Company, Branch & User Context                      |
+| Authorization Engine     | Menus, Buttons & Field Visibility                   |
+| Workflow Engine          | Approval Panels & Tasks                             |
+| Notification Engine      | Alerts & Communication History                      |
+| Reference Data Engine    | Lookup Lists                                        |
+| Activity & Audit Engine  | Activity Timeline                                   |
+| Search & Indexing Engine | Global Search                                       |
+| Reporting Engine         | Dashboards & Reports                                |
+| Platform Event Bus       | Real-Time Updates                                   |
 
 ---
 
 # 33. UI Summary
 
-The Sales Documents Module provides a consistent, enterprise-grade user experience for every official business document.
+The Sales Module provides a modern, enterprise-grade commercial workspace that enables organizations to plan, execute, monitor, and optimize their sales operations.
 
-By using a shared document workspace, role-based interfaces, engine-driven integrations, and standardized navigation, users can efficiently create, review, approve, issue, verify, and manage documents while maintaining security, compliance, and operational consistency across the entire Business Suite platform.
+By separating commercial execution from document generation, inventory management, and financial accounting, the interface remains focused, scalable, and aligned with the Business Suite architecture while offering a consistent user experience across the platform.
 
 ---
 
@@ -811,15 +826,12 @@ WORKFLOWS.md
 
 This document will define:
 
-- End-to-End Business Processes
-- CRM to Sales to Finance Workflows
-- Approval Flows
-- Document Lifecycle Processes
-- Exception and Reversal Workflows
-- Event Bus Sequences
-- Engine Interaction Flows
+- End-to-End Sales Processes
+- CRM to Sales Workflows
+- Pricing and Discount Workflows
+- Target and Forecast Workflows
+- Territory and Team Processes
+- Sales Coordination with Sales Documents
+- Integration with Inventory and Finance
+- Platform Event Flows
 - Business Rules and Decision Points
-
-```
-
-```

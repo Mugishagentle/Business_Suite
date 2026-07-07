@@ -1,4 +1,4 @@
-# Sales Documents Module
+# Sales Module
 
 > Business Suite Enterprise Platform
 
@@ -6,215 +6,241 @@
 
 # 1. Overview
 
-The **Sales Documents Module** is the enterprise document generation and management layer responsible for producing secure, auditable, and legally compliant business documents throughout the sales lifecycle.
+The **Sales Module** is the commercial execution engine of the Business Suite Enterprise Platform.
 
-The module acts as the bridge between **CRM**, **Sales**, and **Finance**, ensuring that every commercial transaction progresses through a standardized document flow while maintaining complete traceability, approval control, and accounting integrity.
+It is responsible for planning, managing, executing, and monitoring the complete sales process from a qualified business opportunity through customer fulfillment, while integrating seamlessly with CRM, Sales Documents, Inventory, Finance, and the Business Suite Platform Engines.
 
-The module does **not** own customer relationships, accounting records, or platform services. Instead, it orchestrates document creation using the Business Suite Platform Engines and integrates with CRM, Sales, Finance, and other platform services.
+The Sales Module is responsible for **how business is sold**, while the Sales Documents Module is responsible for **how business is formally documented**, and the Finance Module is responsible for **how business is financially recorded**.
 
 ---
 
 # 2. Purpose
 
-The Sales Documents Module provides a standardized framework for:
+The Sales Module provides a centralized platform for managing the entire commercial sales operation.
 
-- Creating official business documents
-- Managing document lifecycles
-- Securing business documents
-- Generating enterprise document numbers
-- Producing printable PDFs
-- Supporting approval workflows
-- Managing document versions
-- Supporting customer communication
-- Enabling document verification
-- Maintaining complete audit trails
+Its objectives include:
 
-It establishes a single enterprise standard for every official document generated within Business Suite.
+- Managing sales opportunities after qualification
+- Executing the sales pipeline
+- Managing sales teams
+- Managing sales territories
+- Managing pricing
+- Managing discounts
+- Managing customer negotiations
+- Managing sales performance
+- Coordinating fulfillment
+- Measuring sales profitability
+- Providing management reporting
+
+The module becomes the operational bridge between CRM and downstream business operations.
 
 ---
 
 # 3. Module Objectives
 
-The module is designed to:
+The Sales Module is designed to:
 
-- Standardize all commercial documents
-- Ensure document authenticity
-- Prevent duplicate document numbering
-- Support enterprise approval processes
-- Maintain regulatory compliance
-- Support multi-tenant deployments
-- Support multi-branch organizations
-- Enable secure customer document sharing
-- Support future electronic signatures
-- Support future tax authority integrations
-- Provide enterprise-grade document verification
+- Standardize enterprise sales processes
+- Improve sales visibility
+- Increase sales productivity
+- Improve sales forecasting
+- Control pricing
+- Control discount approvals
+- Improve customer conversion
+- Support multi-branch sales organizations
+- Support multi-company organizations
+- Support multiple sales channels
+- Provide real-time commercial analytics
+- Support future AI-assisted sales forecasting
 
 ---
 
 # 4. Business Scope
 
-The module manages official sales-related documents including:
+The Sales Module manages:
 
-- Sales Quotations
-- Sales Orders
-- Delivery Notes
-- Sales Invoices
-- Receipts
-- Credit Notes
-- Debit Notes
-- Customer Statements
+### Sales Operations
 
-Future extensions may include:
+- Sales Pipeline
+- Sales Activities
+- Sales Execution
+- Sales Planning
 
-- Proforma Invoices
-- Commercial Invoices
-- Export Documents
-- Packing Lists
-- Return Authorizations
-- Service Completion Certificates
-- Warranty Certificates
+### Commercial Management
+
+- Pricing
+- Price Lists
+- Discount Management
+- Promotions
+- Campaign Pricing
+
+### Sales Organization
+
+- Sales Teams
+- Sales Representatives
+- Sales Managers
+- Territories
+- Regions
+
+### Sales Performance
+
+- Targets
+- KPIs
+- Commissions
+- Incentives
+- Leaderboards
+
+### Customer Sales
+
+- Sales History
+- Buying Trends
+- Revenue Analysis
+- Customer Profitability
+
+### Sales Coordination
+
+- Inventory Requests
+- Delivery Coordination
+- Invoice Requests
+- Customer Communication
 
 ---
 
 # 5. Module Ownership
 
-| Business Area          | Ownership                             |
-| ---------------------- | ------------------------------------- |
-| CRM                    | Customer relationship management      |
-| Sales                  | Sales document generation             |
-| Finance                | Financial transactions and accounting |
-| Platform Engines       | Shared enterprise services            |
-| Sales Documents Module | Official business document lifecycle  |
+| Business Area    | Ownership                                |
+| ---------------- | ---------------------------------------- |
+| CRM              | Customer relationships and opportunities |
+| Sales            | Commercial sales operations              |
+| Sales Documents  | Official sales documents                 |
+| Inventory        | Product fulfillment                      |
+| Finance          | Financial transactions and accounting    |
+| Platform Engines | Shared enterprise services               |
 
 ---
 
-# 6. CRM → Sales → Finance Integration
-
-The Sales Documents Module serves as the controlled transition point between CRM and Finance.
+# 6. Position Within Business Suite
 
 ```text
-Lead
+CRM
     │
     ▼
-Qualified Lead
+Sales Module
     │
     ▼
-Opportunity
+Sales Documents
     │
     ▼
-Opportunity Won
+Inventory
     │
     ▼
-Sales Quotation
-    │
-    ▼
+Finance
+```
+
+The Sales Module acts as the operational coordinator between customer engagement and business execution.
+
+---
+
+# 7. Sales Lifecycle
+
+The standard sales lifecycle is:
+
+```text
+Qualified Opportunity
+        │
+        ▼
+Sales Planning
+        │
+        ▼
+Pricing
+        │
+        ▼
+Quotation Request
+        │
+        ▼
+Negotiation
+        │
+        ▼
+Customer Acceptance
+        │
+        ▼
 Sales Order
-    │
-    ▼
-Delivery Note
-    │
-    ▼
-Sales Invoice
-    │
-    ▼
-Finance Receivable
-    │
-    ▼
+        │
+        ▼
+Inventory Fulfillment
+        │
+        ▼
+Delivery
+        │
+        ▼
+Invoice
+        │
+        ▼
 Payment
-    │
-    ▼
-Receipt
+        │
+        ▼
+Customer Retention
 ```
 
 ---
 
-# 7. Ownership Boundaries
+# 8. Responsibilities
 
-## CRM Owns
+The Sales Module owns:
+
+- Sales Pipeline
+- Sales Planning
+- Sales Execution
+- Sales Targets
+- Sales Territories
+- Sales Teams
+- Pricing
+- Discounts
+- Sales Performance
+- Sales Forecasting
+- Commercial Analytics
+- Sales Coordination
+
+The Sales Module does **not** own:
 
 - Leads
-- Accounts
-- Customers
-- Contacts
 - Opportunities
-- Activities
-- Customer Timeline
-- Customer 360
-
-CRM never owns:
-
-- Quotations
-- Orders
-- Invoices
-- Receipts
-- Accounting Entries
-- Document Numbers
-- Official PDFs
-
----
-
-## Sales Owns
-
+- Customer Accounts
 - Quotations
 - Sales Orders
 - Delivery Notes
-- Invoice generation
-- Customer pricing
-- Discounts
-- Sales approvals
-
-Sales never owns:
-
-- Accounting postings
+- Invoices
 - Receipts
-- Ledger balances
-- Financial journals
+- Accounting Entries
+- Stock Balances
 
 ---
 
-## Finance Owns
+# 9. Platform Engine Dependencies
 
-- Customer Accounts
-- Receivables
-- Payments
-- Receipts
-- Credit Notes
-- Debit Notes
-- Ledger postings
-- Tax postings
-- Accounting journals
-
-Finance never owns:
-
-- Opportunities
-- Sales activities
-- Customer engagement history
+The Sales Module depends on the Business Suite Platform Engines.
 
 ---
-
-# 8. Platform Engine Dependencies
-
-The module depends entirely on the Platform Engine architecture.
 
 ## Platform Core
 
 Provides:
 
 - Tenant
+- Organization
 - Company
 - Branch
 - Department
 - Business Unit
-- Organization Profile
-- User Profile
+- Users
 
 Used for:
 
-- Company identity
-- Branch identity
-- Issuer details
-- Approval details
-- Tenant isolation
+- Salesperson assignment
+- Branch allocation
+- Organizational hierarchy
+- Team management
+- Company context
 
 ---
 
@@ -225,178 +251,108 @@ Provides:
 - Roles
 - Permissions
 - Policies
-- Field security
-- Record security
+- Record Security
+- Field Security
 
 Example permissions:
 
 ```text
-sales.quotation.view
-sales.quotation.create
-sales.quotation.edit
-sales.quotation.approve
-sales.quotation.issue
+sales.pipeline.view
+sales.pipeline.manage
 
-sales.order.create
-sales.order.approve
+sales.target.view
+sales.target.manage
 
-sales.invoice.create
-sales.invoice.approve
+sales.pricing.view
+sales.pricing.manage
 
-finance.receipt.create
-finance.receipt.reverse
+sales.discount.request
+sales.discount.approve
 
-document.verify
-document.download
-document.print
+sales.forecast.view
+sales.forecast.manage
+
+sales.team.manage
+sales.performance.view
 ```
 
 ---
 
 ## Workflow Engine
 
-Controls:
+Controls approvals for:
 
-- Quotation Approval
-- Discount Approval
-- Sales Order Approval
-- Invoice Approval
-- Credit Note Approval
-- Receipt Reversal Approval
-
-A document is never considered official until all required workflow stages have been completed.
-
----
-
-## Document Numbering Engine
-
-The Sales Documents Module never generates numbers.
-
-All numbering is delegated to the Document Numbering Engine.
-
-Supported document numbers include:
-
-- Customer Number
-- Lead Number
-- Opportunity Number
-- Quotation Number
-- Sales Order Number
-- Delivery Note Number
-- Invoice Number
-- Receipt Number
-- Credit Note Number
-- Debit Note Number
-
-Numbering supports:
-
-- Tenant-specific sequences
-- Branch-specific sequences
-- Configurable formats
-- Sequential numbering
-- Prefixes
-- Fiscal year formats
-- Locked issued numbers
-- Complete audit history
-
----
-
-## Document Management Engine
-
-Owns:
-
-- Official PDF storage
-- Metadata
-- File security
-- Versioning
-- Downloads
-- Preview generation
-- Retention policies
-
-Sales stores document references only.
-
----
-
-## Notification Engine
-
-Responsible for:
-
-- Email quotations
-- Email invoices
-- Email receipts
-- Approval notifications
-- Payment reminders
-- Delivery notifications
-- SMS notifications
-- Push notifications
-
-Communication history remains available within Sales and Finance.
+- Pricing changes
+- Discount approvals
+- Target approvals
+- Commission approvals
+- Promotional campaigns
+- Territory changes
 
 ---
 
 ## Reference Data Engine
 
-Provides configurable lookup values including:
+Provides configurable values including:
 
-- Document Types
-- Document Statuses
-- Payment Terms
-- Delivery Methods
 - Sales Channels
+- Sales Regions
+- Sales Territories
+- Customer Segments
+- Pricing Methods
 - Discount Types
-- Tax Types
-- Currency Types
-- Customer Categories
-- Approval Statuses
-- Invoice Types
-- Receipt Types
-- Return Reasons
+- Promotion Types
+- Target Types
+- Commission Types
+- Sales Statuses
+- Sales Stages
 
 No lookup values are hardcoded.
 
 ---
 
+## Notification Engine
+
+Supports:
+
+- Target assignments
+- Discount approvals
+- Sales alerts
+- Opportunity notifications
+- Pipeline reminders
+- Forecast reminders
+- Performance notifications
+
+---
+
 ## Activity & Audit Engine
 
-Records every significant document event including:
+Records:
 
-- Created
-- Submitted
-- Approved
-- Rejected
-- Issued
-- Sent
-- Downloaded
-- Verified
-- Cancelled
-- Voided
-- Reversed
-- Printed
-
-Every action is permanently auditable.
+- Sales activities
+- Pricing changes
+- Discount approvals
+- Forecast revisions
+- Territory assignments
+- Target updates
+- Sales management actions
 
 ---
 
 ## Search & Indexing Engine
 
-Indexes documents by:
+Supports searching by:
 
-- Document Number
-- Customer Name
-- Customer Number
-- Invoice Number
-- Receipt Number
-- Amount
-- Status
-- Date
-- Branch
+- Customer
 - Salesperson
+- Territory
+- Sales Team
+- Opportunity
+- Sales Stage
+- Target
+- Region
 
-All searches respect:
-
-- Tenant isolation
-- Branch visibility
-- User permissions
-- Record security
+Search respects tenant, branch, and authorization rules.
 
 ---
 
@@ -404,273 +360,237 @@ All searches respect:
 
 Provides:
 
-- Sales reports
-- Quotation analysis
-- Invoice reports
-- Receipt reports
-- Customer statements
-- Revenue dashboards
-- Outstanding receivables
-- Verification reports
-- Exporting
-- Scheduled reporting
+- Sales Dashboards
+- Sales Forecast Reports
+- Revenue Reports
+- Target Achievement
+- Conversion Analysis
+- Sales Funnel Analysis
+- Territory Performance
+- Customer Sales Analysis
+- Salesperson Performance
 
 ---
 
 ## Platform Event Bus
 
-The module publishes and subscribes to enterprise events.
+Publishes business events including:
+
+```text
+SalesTargetAssigned
+
+SalesTargetUpdated
+
+PricingChanged
+
+DiscountRequested
+
+DiscountApproved
+
+SalesForecastUpdated
+
+SalesTerritoryChanged
+
+SalesPipelineUpdated
+
+CustomerConverted
+
+SalesCompleted
+```
+
+---
+
+# 10. Integration with CRM
+
+CRM remains the customer relationship foundation.
+
+CRM provides:
+
+- Customers
+- Opportunities
+- Contacts
+- Activities
+- Customer Timeline
+- Customer 360
+
+The Sales Module consumes CRM information to execute commercial processes.
+
+Sales updates CRM with:
+
+- Pipeline progress
+- Revenue generated
+- Customer buying behavior
+- Sales history
+- Customer engagement outcomes
+
+---
+
+# 11. Integration with Sales Documents
+
+The Sales Module never generates official business documents directly.
+
+Instead, it requests document creation from the Sales Documents Module.
 
 Examples include:
 
-```text
-OpportunityWon
+- Quotation Request
+- Sales Order Request
+- Delivery Coordination
+- Invoice Request
 
-QuotationCreated
-QuotationSubmitted
-QuotationApproved
-QuotationIssued
-
-SalesOrderCreated
-
-DeliveryNoteIssued
-
-InvoiceCreated
-InvoiceApproved
-InvoicePosted
-
-PaymentReceived
-
-ReceiptIssued
-
-CreditNoteIssued
-
-DebitNoteIssued
-
-DocumentVerified
-
-DocumentVoided
-
-DocumentCancelled
-```
-
----
-
-# 9. Supported Business Documents
-
-The module manages the following official document types:
-
-- Sales Quotation
-- Sales Order
-- Delivery Note
-- Sales Invoice
-- Receipt
-- Credit Note
-- Debit Note
-- Customer Statement
-
-Each document follows its own workflow while sharing a common security and lifecycle model.
-
----
-
-# 10. Enterprise Business Document Standard
-
-Every official Business Suite document shall contain standardized security and identification information.
-
-Required elements include:
-
-- Unique Document Number
-- Internal Serial Number
-- QR Code
-- Verification Code
-- Verification URL
-- Tenant Information
-- Company Details
-- Branch Details
-- Customer Information
-- Document Date
-- Valid Until Date (where applicable)
-- Currency
-- Created By
-- Approved By
-- Issued By
-- Current Status
-- Version Number
-- Digital Hash
-- Audit Reference
-- Watermark
-- Terms and Conditions
-- Page Numbers
-- Print Timestamp
-- System Generated Notice
-
-This standard applies consistently across all official documents generated by Business Suite.
-
----
-
-# 11. QR Code Verification Standard
-
-Every official document contains a secure QR Code.
-
-Verification URL format:
-
-```text
-https://businesssuite.app/verify/{verification_code}
-```
-
-The verification portal returns:
-
-- Document Type
-- Document Number
-- Issuing Company
-- Customer
-- Issue Date
-- Amount
-- Current Status
-- Verification Result
-- Last Verified Date
-
-Possible verification outcomes include:
-
-- Valid
-- Cancelled
-- Voided
-- Expired
-- Reversed
-- Superseded
-- Not Found
-
----
-
-# 12. Official Document Lifecycle
-
-All official documents follow a standardized lifecycle.
-
-```text
-Draft
-    │
-    ▼
-Submitted
-    │
-    ▼
-Approved
-    │
-    ▼
-Issued
-    │
-    ▼
-Sent
-    │
-    ▼
-Accepted
-    │
-    ▼
-Paid / Closed
-```
-
-Alternative lifecycle paths include:
-
-```text
-Rejected
-
-Cancelled
-
-Voided
-
-Expired
-
-Reversed
-
-Superseded
-```
-
-Draft documents are not legally or operationally considered official.
-
----
-
-# 13. Official Document Issuance Rules
-
-A document becomes official only after all required conditions have been satisfied.
-
-These include:
-
-- Required workflow approvals completed
-- Official document number assigned and locked
-- QR Code generated
-- Verification code generated
-- Verification URL created
-- PDF generated
-- Digital hash calculated
-- Audit record created
-- Document stored in the Document Management Engine
-- Lifecycle status changed to **Issued**
-
-Only issued documents may be distributed externally.
-
----
-
-# 14. Multi-Tenant Architecture
-
-The module fully supports Business Suite's multi-tenant architecture.
-
-Each tenant maintains independent:
-
-- Customers
-- Document numbering sequences
-- Branding
-- Branches
-- Templates
-- Approval workflows
-- Document storage
-- Notifications
-- Security policies
-- Audit history
-
-No document data is shared across tenants.
-
----
-
-# 15. Multi-Branch Support
-
-Where enabled, documents are branch-aware.
-
-Branch information may influence:
+Sales Documents owns:
 
 - Document numbering
-- Branch branding
-- Warehouse selection
-- Inventory fulfillment
-- Tax configuration
-- Sales reporting
-- Approval routing
-- User visibility
+- PDF generation
+- QR codes
+- Verification
+- Security
+- Document lifecycle
 
 ---
 
-# 16. Integration Summary
+# 12. Integration with Inventory
 
-The Sales Documents Module integrates with:
+The Sales Module coordinates with Inventory for:
 
-- Platform Core
-- CRM Module
-- Sales Module
-- Finance Module
-- Authorization Engine
-- Workflow Engine
-- Document Numbering Engine
-- Document Management Engine
-- Notification Engine
-- Reference Data Engine
-- Activity & Audit Engine
-- Search & Indexing Engine
-- Reporting Engine
-- Platform Event Bus
+- Product availability
+- Stock reservations
+- Warehouse allocation
+- Delivery planning
+- Fulfillment status
 
-This architecture ensures that every official business document is generated, secured, approved, stored, verified, and audited according to a single enterprise-wide standard across the Business Suite platform.
+Inventory remains the owner of all stock operations.
 
 ---
 
-# 17. Next Document
+# 13. Integration with Finance
+
+Finance receives commercial outcomes from the Sales Module through Sales Documents.
+
+Finance owns:
+
+- Receivables
+- Payments
+- Receipts
+- Ledger postings
+- Revenue recognition
+- Customer financial balances
+
+The Sales Module consumes financial summaries such as:
+
+- Customer outstanding balances
+- Credit limits
+- Payment history
+- Available credit
+
+to support commercial decision-making.
+
+---
+
+# 14. Key Functional Areas
+
+The Sales Module consists of the following business capabilities:
+
+- Sales Dashboard
+- Sales Pipeline
+- Sales Planning
+- Sales Teams
+- Sales Territories
+- Sales Targets
+- Pricing Management
+- Discount Management
+- Promotions
+- Sales Forecasting
+- Sales Performance
+- Commission Management
+- Customer Sales Insights
+- Sales Coordination
+- Sales Reports
+
+---
+
+# 15. Multi-Tenant Architecture
+
+Every tenant maintains independent:
+
+- Sales Teams
+- Sales Targets
+- Pricing Rules
+- Territories
+- Sales Channels
+- Promotions
+- Forecasts
+- Reports
+- KPIs
+- Dashboards
+
+No commercial information is shared across tenants.
+
+---
+
+# 16. Multi-Branch Support
+
+The Sales Module supports branch-level operations including:
+
+- Branch Sales Teams
+- Branch Targets
+- Branch Pricing
+- Branch Promotions
+- Branch Dashboards
+- Branch Forecasts
+- Branch Performance
+- Branch Revenue Analysis
+
+Branch security is enforced by the Authorization Engine.
+
+---
+
+# 17. Design Principles
+
+The Sales Module follows these principles:
+
+- CRM-first customer management
+- Document separation of concerns
+- Finance ownership of accounting
+- Inventory ownership of stock
+- Platform Engine reuse
+- Event-driven communication
+- Workflow-controlled approvals
+- Configurable business rules
+- Enterprise scalability
+- Complete auditability
+
+---
+
+# 18. Future Extensions
+
+The architecture supports future enhancements including:
+
+- AI-assisted sales forecasting
+- Predictive pricing recommendations
+- Dynamic pricing engines
+- Territory optimization
+- Mobile sales application
+- Offline sales capability
+- Route planning
+- Customer visit scheduling
+- Digital product catalogs
+- CPQ (Configure, Price, Quote)
+- B2B customer self-service sales portal
+
+---
+
+# 19. Module Summary
+
+The Sales Module serves as the commercial execution engine of Business Suite.
+
+It transforms customer opportunities into profitable business by managing sales execution, pricing, targets, forecasting, territories, and performance, while delegating document management to the Sales Documents Module, inventory operations to the Inventory Module, and financial accounting to the Finance Module.
+
+This separation of responsibilities ensures a scalable, maintainable, and enterprise-grade architecture aligned with the overall Business Suite platform.
+
+---
+
+# 20. Next Document
 
 The next specification document is:
 
@@ -682,11 +602,11 @@ This document will define:
 
 - Component Architecture
 - Internal Services
+- Sales Domain Services
+- Pricing Architecture
+- Sales Pipeline Architecture
+- Forecasting Architecture
 - Engine Interactions
-- Document Generation Pipeline
-- Verification Architecture
-- Event Flow
 - Integration Contracts
-- Module Boundaries
+- Platform Events
 - Service Responsibilities
-- High-Level System Diagrams
